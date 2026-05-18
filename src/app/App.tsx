@@ -265,9 +265,8 @@ export default function App() {
                     key={i}
                     className="block text-6xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase"
                     style={{
-                      color: i === 1 ? C.red : C.ink,
-                      WebkitTextStroke: i === 2 ? `2px ${C.ink}` : undefined,
                       color: i === 2 ? 'transparent' : (i === 1 ? C.red : C.ink),
+                      WebkitTextStroke: i === 2 ? `2px ${C.ink}` : undefined,
                       textShadow: i === 1 ? `4px 4px 0 ${C.ink}` : undefined,
                     }}
                   >
