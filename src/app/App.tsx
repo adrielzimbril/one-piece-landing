@@ -1,0 +1,439 @@
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowRight, Facebook, Instagram, Youtube, Anchor, Skull, Compass, Ship, Crown, Swords, Users } from "lucide-react";
+import slide1 from "../imports/image.png";
+import slide2 from "../imports/image-1.png";
+import { Crew } from "./components/Crew";
+import { MemberPage } from "./components/MemberPage";
+import { members, findMember } from "./members";
+
+type Route = { name: 'home' } | { name: 'crew' } | { name: 'member'; id: string };
+
+const display = { fontFamily: 'Anton, sans-serif' };
+const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
+const mono = { fontFamily: '"JetBrains Mono", monospace' };
+
+const C = {
+  cream: '#EFE7D2',
+  ink: '#0B0B0B',
+  red: '#E2231A',
+  redDeep: '#9A1410',
+  bone: '#F8F2E2',
+};
+
+const crew = [
+  { name: "Straw Hats", jp: "麦わら", Icon: Skull },
+  { name: "Going Merry", jp: "メリー", Icon: Ship },
+  { name: "Log Pose", jp: "ログ", Icon: Compass },
+  { name: "Pirate King", jp: "海賊王", Icon: Crown },
+  { name: "Three Swords", jp: "三刀流", Icon: Swords },
+  { name: "Grand Line", jp: "偉大なる航路", Icon: Anchor },
+];
+
+const slides = [
+  {
+    image: slide1,
+    issue: "001",
+    kicker: "EAST BLUE // CHAPTER ONE",
+    heading: ["SAIL THE", "GRAND", "LINE"],
+    jpHead: "偉大なる航路",
+    sub: "Chase the horizon with Luffy and the Straw Hats — adventure waits beyond every wave.",
+    stat: "1000+",
+    statLabel: "EPISODES OF ADVENTURE",
+    statJp: "千話の冒険",
+    bounty: "3,000,000,000",
+  },
+  {
+    image: slide2,
+    issue: "002",
+    kicker: "NEW WORLD // CHAPTER TWO",
+    heading: ["BECOME", "THE PIRATE", "KING"],
+    jpHead: "海賊王に俺はなる",
+    sub: "A dream that defies the seas, the marines, and the world itself — set sail for One Piece.",
+    stat: "25+",
+    statLabel: "YEARS AT FULL SAIL",
+    statJp: "二十五年航海",
+    bounty: "1,500,000,000",
+  },
+];
+
+function NavStrip({ route, setRoute }: { route: Route; setRoute: (r: Route) => void }) {
+  return (
+    <div className="px-6 lg:px-12 py-4 flex items-center justify-between" style={{ backgroundColor: C.cream, borderBottom: `2px solid ${C.ink}` }}>
+      <div className="flex items-center gap-2 px-3 py-1.5" style={{ backgroundColor: C.ink }}>
+        <span className="text-2xl lg:text-3xl leading-none" style={{ ...display, color: C.red }}>ONE</span>
+        <span className="text-2xl lg:text-3xl leading-none" style={{ ...display, color: C.bone }}>PIECE</span>
+      </div>
+      <div className="flex items-center gap-1 px-2 py-1.5 rounded-full" style={{ backgroundColor: C.ink }}>
+        {[
+          { label: 'Home', active: false, go: () => setRoute({ name: 'home' }) },
+          { label: 'Crew', active: route.name === 'crew', go: () => setRoute({ name: 'crew' }) },
+        ].map((it) => (
+          <button
+            key={it.label}
+            onClick={it.go}
+            className="px-4 py-1.5 text-sm rounded-full"
+            style={{ color: it.active ? C.ink : C.bone, backgroundColor: it.active ? C.bone : 'transparent', fontWeight: it.active ? 600 : 400 }}
+          >
+            {it.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Tag({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+  return (
+    <span
+      className="inline-block px-2 py-0.5 text-[10px] tracking-[0.15em]"
+      style={{
+        ...mono,
+        backgroundColor: dark ? C.ink : C.red,
+        color: dark ? C.bone : C.bone,
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
+export default function App() {
+  const [route, setRoute] = useState<Route>({ name: 'home' });
+  const [index, setIndex] = useState(0);
+
+  if (route.name === 'crew') {
+    return (
+      <div>
+        <NavStrip route={route} setRoute={setRoute} />
+        <Crew onSelect={(id) => setRoute({ name: 'member', id })} />
+      </div>
+    );
+  }
+  if (route.name === 'member') {
+    const m = findMember(route.id);
+    if (!m) { setRoute({ name: 'crew' }); return null; }
+    return <MemberPage member={m} onBack={() => setRoute({ name: 'crew' })} />;
+  }
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 6500);
+    return () => clearInterval(id);
+  }, []);
+
+  const slide = slides[index];
+
+  return (
+    <div
+      className="h-screen overflow-hidden flex flex-col relative"
+      style={{ backgroundColor: C.cream, fontFamily: 'Inter, sans-serif', color: C.ink }}
+    >
+      <AnimatePresence mode="sync">
+        <motion.img
+          key={index}
+          src={slide.image}
+          alt=""
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ opacity: { duration: 1.4, ease: "easeInOut" }, scale: { duration: 8, ease: "easeOut" } }}
+          className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
+          style={{ zIndex: 0 }}
+        />
+      </AnimatePresence>
+
+      {/* Vertical side label */}
+      <div
+        className="fixed left-3 top-1/2 -translate-y-1/2 text-[10px] tracking-[0.4em]"
+        style={{ ...mono, zIndex: 10, color: C.ink, writingMode: 'vertical-rl' }}
+      >
+        ONE PIECE // ワンピース // EST. 1997
+      </div>
+      <div
+        className="fixed right-3 top-1/2 -translate-y-1/2 text-[10px] tracking-[0.4em]"
+        style={{ ...mono, zIndex: 10, color: C.ink, writingMode: 'vertical-rl' }}
+      >
+        ISSUE NO. {slide.issue} // CHAPTER {index + 1} OF {slides.length}
+      </div>
+
+      <header
+        className="relative px-6 lg:px-12 py-4 lg:py-5 flex-shrink-0"
+        style={{ zIndex: 10 }}
+      >
+        <nav className="flex items-center justify-between gap-4">
+          {/* Logo block */}
+          <div
+            className="flex items-center gap-2 px-3 py-1.5"
+            style={{ backgroundColor: C.ink }}
+          >
+            <span className="text-3xl lg:text-4xl leading-none" style={{ ...display, color: C.red }}>ONE</span>
+            <span className="text-3xl lg:text-4xl leading-none" style={{ ...display, color: C.bone }}>PIECE</span>
+            <span className="text-xs ml-1" style={{ ...jp, color: C.bone }}>海賊</span>
+          </div>
+
+          {/* Nav pill */}
+          <div
+            className="hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full"
+            style={{ backgroundColor: C.ink, border: `2px solid ${C.ink}` }}
+          >
+            {[
+              { label: "Home", active: true, onClick: () => setRoute({ name: 'home' }) },
+              { label: "Crew", active: false, onClick: () => setRoute({ name: 'crew' }) },
+              { label: "Arcs", active: false, onClick: () => {} },
+              { label: "Bounties", active: false, onClick: () => {} },
+              { label: "Log", active: false, onClick: () => {} },
+            ].map((item) => (
+              <button
+                key={item.label}
+                onClick={item.onClick}
+                className="px-3 lg:px-4 py-1.5 text-sm lg:text-base rounded-full transition"
+                style={{
+                  color: item.active ? C.ink : C.bone,
+                  backgroundColor: item.active ? C.bone : 'transparent',
+                  fontWeight: item.active ? 600 : 400,
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="px-4 lg:px-5 py-2 text-sm lg:text-base rounded-full"
+              style={{
+                backgroundColor: C.bone,
+                color: C.ink,
+                border: `2px solid ${C.ink}`,
+              }}
+            >
+              Sign Up
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="px-4 lg:px-5 py-2 text-sm lg:text-base rounded-full"
+              style={{
+                backgroundColor: C.red,
+                color: C.bone,
+                border: `2px solid ${C.ink}`,
+              }}
+            >
+              Set Sail
+            </motion.button>
+          </div>
+        </nav>
+      </header>
+
+      <main
+        className="relative px-6 lg:px-12 py-4 lg:py-6 flex-1 flex flex-col justify-between"
+        style={{ zIndex: 10 }}
+      >
+        {/* TOP ROW */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`l-${index}`}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-7"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Tag>ISSUE {slide.issue}</Tag>
+                <span className="text-[11px] tracking-[0.2em]" style={mono}>{slide.kicker}</span>
+              </div>
+              <h1
+                className="leading-[0.82] tracking-tight mb-2"
+                style={{ ...display }}
+              >
+                {slide.heading.map((line, i) => (
+                  <span
+                    key={i}
+                    className="block text-6xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase"
+                    style={{
+                      color: i === 1 ? C.red : C.ink,
+                      WebkitTextStroke: i === 2 ? `2px ${C.ink}` : undefined,
+                      color: i === 2 ? 'transparent' : (i === 1 ? C.red : C.ink),
+                      textShadow: i === 1 ? `4px 4px 0 ${C.ink}` : undefined,
+                    }}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </h1>
+              <div className="flex items-baseline gap-3 mb-4">
+                <span className="text-2xl lg:text-3xl" style={{ ...jp, color: C.red, fontWeight: 900 }}>
+                  {slide.jpHead}
+                </span>
+                <span className="text-[11px] tracking-[0.25em]" style={mono}>// CANON</span>
+              </div>
+              <p className="text-base lg:text-lg mb-5 max-w-md" style={{ color: C.ink }}>
+                {slide.sub}
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.04, x: 4 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 pl-6 pr-1.5 py-1.5 rounded-full"
+                style={{
+                  backgroundColor: C.ink,
+                  color: C.bone,
+                  border: `2px solid ${C.ink}`,
+                }}
+              >
+                <span className="text-sm lg:text-base tracking-[0.2em]" style={display}>HOIST THE FLAG</span>
+                <span
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: C.red }}
+                >
+                  <ArrowRight className="w-5 h-5" style={{ color: C.bone }} />
+                </span>
+              </motion.button>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* DATA FILE */}
+          <AnimatePresence mode="wait">
+            <motion.aside
+              key={`r-${index}`}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 16 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 lg:justify-self-end w-full max-w-sm"
+            >
+              <div
+                className="p-4 lg:p-5"
+                style={{ backgroundColor: C.bone, border: `2px solid ${C.ink}`, boxShadow: `6px 6px 0 ${C.ink}` }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <Tag dark>DATA FILE</Tag>
+                  <span className="text-[10px]" style={mono}>FILE_NO.{slide.issue}</span>
+                </div>
+                <div className="flex items-end gap-2 mb-1">
+                  <span className="text-6xl lg:text-7xl leading-[0.85]" style={{ ...display, color: C.red }}>{slide.stat}</span>
+                  <span className="text-lg pb-2" style={{ ...jp, color: C.ink }}>{slide.statJp}</span>
+                </div>
+                <p className="text-xs tracking-[0.2em] mb-4" style={mono}>{slide.statLabel}</p>
+                <div className="h-px w-full mb-3" style={{ backgroundColor: C.ink }} />
+                <div className="grid grid-cols-2 gap-y-1.5 text-xs" style={mono}>
+                  <span className="opacity-60">BOUNTY</span>
+                  <span className="text-right">฿ {slide.bounty}</span>
+                  <span className="opacity-60">CREW</span>
+                  <span className="text-right">STRAW HAT</span>
+                  <span className="opacity-60">SEA</span>
+                  <span className="text-right">GRAND LINE</span>
+                  <span className="opacity-60">STATUS</span>
+                  <span className="text-right" style={{ color: C.red }}>● ACTIVE</span>
+                </div>
+              </div>
+            </motion.aside>
+          </AnimatePresence>
+        </div>
+
+        {/* MIDDLE ROW */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-end">
+          <div className="flex items-start gap-4">
+            <div
+              className="px-2 py-1 text-[10px] tracking-[0.2em] flex-shrink-0"
+              style={{ ...mono, backgroundColor: C.ink, color: C.bone }}
+            >
+              MANIFESTO
+            </div>
+            <div>
+              <p className="text-sm lg:text-base max-w-md mb-3" style={{ color: C.ink }}>
+                Born from Oda's pen — a flag planted for freedom, friendship, and the courage to chase impossible dreams.
+              </p>
+              <div className="flex items-center gap-2">
+                {[Facebook, Instagram, Youtube].map((Icon, i) => (
+                  <motion.a
+                    key={i}
+                    href="#"
+                    whileHover={{ y: -3, rotate: -4 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: C.ink, color: C.bone, border: `2px solid ${C.ink}` }}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end gap-3">
+            <span className="text-[10px] tracking-[0.3em]" style={mono}>
+              {String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+            </span>
+            <div className="flex items-center gap-1.5">
+              {slides.map((_, i) => (
+                <motion.button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  animate={{ width: i === index ? 56 : 22 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                  className="h-2"
+                  style={{
+                    backgroundColor: i === index ? C.red : C.ink,
+                    opacity: i === index ? 1 : 0.4,
+                  }}
+                  aria-label={`Slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM: CTA + crew preview */}
+        <div
+          className="flex items-center justify-between gap-4 px-4 py-3 rounded-full flex-wrap"
+          style={{ backgroundColor: C.bone, border: `2px solid ${C.ink}`, boxShadow: `4px 4px 0 ${C.ink}` }}
+        >
+          <div className="flex items-center gap-3">
+            <span className="px-2 py-1 text-[10px] tracking-[0.2em]" style={{ ...mono, backgroundColor: C.ink, color: C.bone }}>ROSTER // 10</span>
+            <div className="flex items-center -space-x-2">
+              {members.slice(0, 6).map((m) => (
+                <button
+                  key={m.id}
+                  onClick={() => setRoute({ name: 'member', id: m.id })}
+                  title={m.alias}
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-bold transition hover:-translate-y-1"
+                  style={{
+                    background: `linear-gradient(135deg, ${m.color}, ${m.colorDeep})`,
+                    color: C.bone,
+                    border: `2px solid ${C.ink}`,
+                  }}
+                >
+                  {m.alias.charAt(0)}
+                </button>
+              ))}
+              <span
+                className="w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-bold"
+                style={{ backgroundColor: C.ink, color: C.bone, border: `2px solid ${C.ink}` }}
+              >
+                +4
+              </span>
+            </div>
+            <span className="text-sm hidden sm:inline" style={{ color: C.ink }}>Meet every member of the Straw Hat Pirates</span>
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.04, x: 4 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setRoute({ name: 'crew' })}
+            className="inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full"
+            style={{ backgroundColor: C.red, color: C.bone, border: `2px solid ${C.ink}` }}
+          >
+            <Users className="w-4 h-4" />
+            <span className="text-sm lg:text-base tracking-[0.2em]" style={display}>SEE THE CREW</span>
+            <span className="w-9 h-9 rounded-full flex items-center justify-center" style={{ backgroundColor: C.ink }}>
+              <ArrowRight className="w-4 h-4" style={{ color: C.bone }} />
+            </span>
+          </motion.button>
+        </div>
+      </main>
+    </div>
+  );
+}
