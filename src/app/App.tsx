@@ -5,9 +5,10 @@ import slide1 from "../imports/image.png";
 import slide2 from "../imports/image-1.png";
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
+import { Gears } from "./components/Gears";
 import { members, findMember } from "./members";
 
-type Route = { name: 'home' } | { name: 'crew' } | { name: 'member'; id: string };
+type Route = { name: 'home' } | { name: 'crew' } | { name: 'member'; id: string } | { name: 'gears' };
 
 const display = { fontFamily: 'Anton, sans-serif' };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
@@ -68,6 +69,7 @@ function NavStrip({ route, setRoute }: { route: Route; setRoute: (r: Route) => v
         {[
           { label: 'Home', active: false, go: () => setRoute({ name: 'home' }) },
           { label: 'Crew', active: route.name === 'crew', go: () => setRoute({ name: 'crew' }) },
+          { label: 'Gears', active: route.name === 'gears', go: () => setRoute({ name: 'gears' }) },
         ].map((it) => (
           <button
             key={it.label}
@@ -107,6 +109,14 @@ export default function App() {
       <div>
         <NavStrip route={route} setRoute={setRoute} />
         <Crew onSelect={(id) => setRoute({ name: 'member', id })} />
+      </div>
+    );
+  }
+  if (route.name === 'gears') {
+    return (
+      <div>
+        <NavStrip route={route} setRoute={setRoute} />
+        <Gears />
       </div>
     );
   }
@@ -179,9 +189,9 @@ export default function App() {
             {[
               { label: "Home", active: true, onClick: () => setRoute({ name: 'home' }) },
               { label: "Crew", active: false, onClick: () => setRoute({ name: 'crew' }) },
+              { label: "Gears", active: false, onClick: () => setRoute({ name: 'gears' }) },
               { label: "Arcs", active: false, onClick: () => {} },
               { label: "Bounties", active: false, onClick: () => {} },
-              { label: "Log", active: false, onClick: () => {} },
             ].map((item) => (
               <button
                 key={item.label}
