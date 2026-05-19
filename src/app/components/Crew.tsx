@@ -2,17 +2,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ArrowUpRight, Skull } from "lucide-react";
 import { members } from "../members";
+import { onePieceTheme } from "../onePieceTheme";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
 const mono = { fontFamily: '"JetBrains Mono", monospace' };
 
-const C = {
-  cream: "#F8F8F8",
-  ink: "#0B0B0B",
-  bone: "#F2F2F2",
-  red: "#E2231A",
-};
+const C = onePieceTheme;
 
 const memberImages: Record<string, string[]> = {
   brook: ["/assets/brook.jpeg", "/assets/brook-1.jpeg"],
@@ -68,6 +64,7 @@ export function Crew({ onSelect, setRoute }: Props) {
       className="relative h-[100dvh] overflow-hidden"
       style={{
         backgroundColor: C.cream,
+        backgroundImage: `linear-gradient(135deg, ${C.cream} 0%, ${C.bone} 44%, ${C.seaFoam}44 100%)`,
         color: C.ink,
         fontFamily: "Inter, sans-serif",
       }}
@@ -117,7 +114,7 @@ export function Crew({ onSelect, setRoute }: Props) {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at left bottom, rgba(248, 248, 248, 0.96) 0%, rgba(248, 248, 248, 0.78) 24%, transparent 54%), radial-gradient(ellipse at left top, rgba(248, 248, 248, 0.46) 0%, rgba(248, 248, 248, 0.22) 24%, transparent 52%), linear-gradient(30deg, ${C.ink}A8 0%, ${C.ink}55 24%, transparent 48%)`,
+          background: `radial-gradient(ellipse at left bottom, rgba(255, 243, 214, 0.96) 0%, rgba(255, 243, 214, 0.78) 24%, transparent 54%), radial-gradient(ellipse at left top, rgba(255, 201, 40, 0.34) 0%, rgba(0, 119, 200, 0.16) 28%, transparent 56%), linear-gradient(30deg, ${C.blueDeep}B0 0%, ${C.ink}55 24%, transparent 48%)`,
         }}
       />
 
@@ -142,7 +139,7 @@ export function Crew({ onSelect, setRoute }: Props) {
               type="button"
               onClick={() => setRoute({ name: "home" })}
               className="flex items-center gap-2 px-3 py-1.5"
-              style={{ backgroundColor: C.ink }}
+              style={{ backgroundColor: C.ink, boxShadow: `4px 4px 0 ${C.gold}` }}
               aria-label="Go home"
             >
               <span
@@ -167,7 +164,7 @@ export function Crew({ onSelect, setRoute }: Props) {
 
             <div
               className="hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex"
-              style={{ backgroundColor: C.ink, border: `2px solid ${C.ink}` }}
+              style={{ backgroundColor: C.blueDeep, border: `2px solid ${C.ink}` }}
             >
               {[
                 {
@@ -193,7 +190,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   className="rounded-full px-3 py-1.5 text-sm transition lg:px-4 lg:text-base"
                   style={{
                     color: item.active ? C.ink : C.bone,
-                    backgroundColor: item.active ? C.bone : "transparent",
+                    backgroundColor: item.active ? C.gold : "transparent",
                     fontWeight: item.active ? 600 : 400,
                   }}
                 >
@@ -208,7 +205,7 @@ export function Crew({ onSelect, setRoute }: Props) {
               <div className="mb-2 flex flex-wrap items-center gap-2">
                 <span
                   className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
-                  style={{ ...mono, backgroundColor: C.ink, color: C.bone }}
+                  style={{ ...mono, backgroundColor: C.blueDeep, color: C.bone }}
                 >
                   ROSTER // 10
                 </span>
@@ -225,7 +222,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   className="block"
                   style={{
                     color: active.color,
-                    textShadow: `4px 4px 0 ${C.ink}`,
+                    textShadow: `4px 4px 0 ${C.gold}`,
                   }}
                 >
                   Pirates
@@ -241,7 +238,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                 style={{
                   ...display,
                   color: active.color,
-                  textShadow: `2px 2px 0 ${C.ink}`,
+                  textShadow: `2px 2px 0 ${C.gold}`,
                 }}
               >
                 ฿ 8,816,001,000
@@ -266,7 +263,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   style={{
                     ...display,
                     color: active.color,
-                    textShadow: `4px 4px 0 ${C.ink}`,
+                    textShadow: `4px 4px 0 ${C.gold}`,
                   }}
                 >
                   {String(index + 1).padStart(2, "0")}
@@ -312,6 +309,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   backgroundColor: active.color,
                   color: C.bone,
                   border: `2px solid ${C.ink}`,
+                  boxShadow: `4px 4px 0 ${C.gold}`,
                 }}
               >
                 <span
@@ -322,7 +320,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                 </span>
                 <span
                   className="flex h-9 w-9 items-center justify-center rounded-full"
-                  style={{ backgroundColor: C.ink }}
+                  style={{ backgroundColor: C.blueDeep }}
                 >
                   <ArrowRight className="h-4 w-4" />
                 </span>
@@ -344,13 +342,13 @@ export function Crew({ onSelect, setRoute }: Props) {
                 style={{
                   backgroundColor: C.bone,
                   border: `2px solid ${C.ink}`,
-                  boxShadow: `6px 6px 0 ${C.ink}`,
+                  boxShadow: `6px 6px 0 ${active.color}`,
                 }}
               >
                 <div className="mb-3 flex items-center justify-between">
                   <span
                     className="px-1.5 py-0.5 text-[10px] tracking-[0.2em]"
-                    style={{ ...mono, backgroundColor: C.ink, color: C.bone }}
+                    style={{ ...mono, backgroundColor: C.gold, color: C.ink }}
                   >
                     DATA FILE
                   </span>
@@ -395,8 +393,8 @@ export function Crew({ onSelect, setRoute }: Props) {
                     color: isActive ? C.bone : C.ink,
                     border: `2px solid ${C.ink}`,
                     boxShadow: isActive
-                      ? `4px 4px 0 ${C.ink}`
-                      : `2px 2px 0 ${C.ink}`,
+                      ? `4px 4px 0 ${C.gold}`
+                      : `2px 2px 0 ${C.blue}`,
                   }}
                   aria-label={`Show ${member.name}`}
                 >

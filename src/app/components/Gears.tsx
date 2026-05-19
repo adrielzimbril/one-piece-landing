@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Activity, Flame, Sun, Wind, Zap } from "lucide-react";
+import { onePieceTheme } from "../onePieceTheme";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
 const mono = { fontFamily: '"JetBrains Mono", monospace' };
 
-const BONE = "#F2F2F2";
-const CREAM = "#F8F8F8";
-const INK = "#0B0B0B";
+const { bone: BONE, cream: CREAM, ink: INK, blue, blueDeep, gold, seaFoam } =
+  onePieceTheme;
 
 const gear1 = "/assets/gear-1.jpeg";
 const gear2 = "/assets/gear-2.jpeg";
@@ -133,6 +133,7 @@ export function Gears({ setRoute }: Props) {
       className="relative h-[100dvh] overflow-hidden"
       style={{
         backgroundColor: CREAM,
+        backgroundImage: `linear-gradient(135deg, ${CREAM} 0%, ${BONE} 46%, ${seaFoam}44 100%)`,
         color: INK,
         fontFamily: "Inter, sans-serif",
       }}
@@ -181,7 +182,7 @@ export function Gears({ setRoute }: Props) {
               type="button"
               onClick={() => setRoute({ name: "home" })}
               className="flex items-center gap-2 px-3 py-1.5"
-              style={{ backgroundColor: INK }}
+              style={{ backgroundColor: INK, boxShadow: `4px 4px 0 ${gold}` }}
               aria-label="Go home"
             >
               <span
@@ -206,7 +207,7 @@ export function Gears({ setRoute }: Props) {
 
             <div
               className="hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex"
-              style={{ backgroundColor: INK, border: `2px solid ${INK}` }}
+              style={{ backgroundColor: blueDeep, border: `2px solid ${INK}` }}
             >
               {[
                 {
@@ -232,7 +233,7 @@ export function Gears({ setRoute }: Props) {
                   className="rounded-full px-3 py-1.5 text-sm transition lg:px-4 lg:text-base"
                   style={{
                     color: item.active ? INK : BONE,
-                    backgroundColor: item.active ? BONE : "transparent",
+                    backgroundColor: item.active ? gold : "transparent",
                     fontWeight: item.active ? 600 : 400,
                   }}
                 >
@@ -247,7 +248,7 @@ export function Gears({ setRoute }: Props) {
               <div className="mb-2 flex flex-wrap items-center gap-2">
                 <span
                   className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
-                  style={{ ...mono, backgroundColor: INK, color: BONE }}
+                  style={{ ...mono, backgroundColor: blueDeep, color: BONE }}
                 >
                   ARSENAL // 05
                 </span>
@@ -263,7 +264,7 @@ export function Gears({ setRoute }: Props) {
                 <span
                   style={{
                     color: active.accent,
-                    textShadow: `4px 4px 0 ${INK}`,
+                    textShadow: `4px 4px 0 ${gold}`,
                   }}
                 >
                   's
@@ -280,7 +281,7 @@ export function Gears({ setRoute }: Props) {
                 style={{
                   ...display,
                   color: active.accent,
-                  textShadow: `2px 2px 0 ${INK}`,
+                  textShadow: `2px 2px 0 ${gold}`,
                 }}
               >
                 ฿ 3,000,000,000
@@ -305,7 +306,7 @@ export function Gears({ setRoute }: Props) {
                   style={{
                     ...display,
                     color: active.accent,
-                    textShadow: `4px 4px 0 ${INK}`,
+                    textShadow: `4px 4px 0 ${gold}`,
                   }}
                 >
                   {active.num}
@@ -358,13 +359,13 @@ export function Gears({ setRoute }: Props) {
                 style={{
                   backgroundColor: BONE,
                   border: `2px solid ${INK}`,
-                  boxShadow: `6px 6px 0 ${INK}`,
+                  boxShadow: `6px 6px 0 ${active.accent}`,
                 }}
               >
                 <div className="mb-3 flex items-center justify-between">
                   <span
                     className="px-1.5 py-0.5 text-[10px] tracking-[0.2em]"
-                    style={{ ...mono, backgroundColor: INK, color: BONE }}
+                    style={{ ...mono, backgroundColor: gold, color: INK }}
                   >
                     DATA FILE
                   </span>
@@ -414,8 +415,8 @@ export function Gears({ setRoute }: Props) {
                     color: isActive ? BONE : INK,
                     border: `2px solid ${INK}`,
                     boxShadow: isActive
-                      ? `4px 4px 0 ${INK}`
-                      : `2px 2px 0 ${INK}`,
+                      ? `4px 4px 0 ${gold}`
+                      : `2px 2px 0 ${blue}`,
                   }}
                   aria-label={`Show ${gear.name}`}
                 >

@@ -1,13 +1,21 @@
 import { motion } from "motion/react";
 import { ArrowLeft, Quote } from "lucide-react";
 import type { Member } from "../members";
+import { onePieceTheme } from "../onePieceTheme";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
 const mono = { fontFamily: '"JetBrains Mono", monospace' };
 
-const BONE = "#F2F2F2";
-const INK = "#0B0B0B";
+const {
+  bone: BONE,
+  cream: CREAM,
+  ink: INK,
+  blue,
+  blueDeep,
+  gold,
+  seaFoam,
+} = onePieceTheme;
 
 type Props = { member: Member; onBack: () => void };
 
@@ -16,7 +24,7 @@ export function MemberPage({ member, onBack }: Props) {
     <div
       className="min-h-screen relative overflow-hidden"
       style={{
-        background: `radial-gradient(circle at 30% 20%, ${member.color}33 0%, transparent 60%), linear-gradient(180deg, ${BONE} 0%, ${member.color}1F 100%)`,
+        background: `radial-gradient(circle at 24% 18%, ${gold}5C 0%, transparent 34%), radial-gradient(circle at 88% 10%, ${seaFoam}66 0%, transparent 36%), radial-gradient(circle at 30% 20%, ${member.color}33 0%, transparent 60%), linear-gradient(180deg, ${CREAM} 0%, ${BONE} 46%, ${member.color}24 100%)`,
         color: INK,
         fontFamily: "Inter, sans-serif",
       }}
@@ -50,6 +58,7 @@ export function MemberPage({ member, onBack }: Props) {
             backgroundColor: INK,
             color: BONE,
             border: `2px solid ${INK}`,
+            boxShadow: `4px 4px 0 ${gold}`,
           }}
         >
           <ArrowLeft className="w-4 h-4" />
@@ -60,13 +69,18 @@ export function MemberPage({ member, onBack }: Props) {
         <div className="flex items-center gap-2">
           <span
             className="px-2 py-1 text-[10px] tracking-[0.2em]"
-            style={{ ...mono, backgroundColor: INK, color: BONE }}
+            style={{ ...mono, backgroundColor: blueDeep, color: BONE }}
           >
             FILE_NO.{member.id.toUpperCase()}
           </span>
           <span
             className="px-2 py-1 text-[10px] tracking-[0.2em]"
-            style={{ ...mono, backgroundColor: member.color, color: BONE }}
+            style={{
+              ...mono,
+              backgroundColor: gold,
+              color: INK,
+              border: `1px solid ${INK}`,
+            }}
           >
             ● ACTIVE
           </span>
@@ -84,14 +98,14 @@ export function MemberPage({ member, onBack }: Props) {
             style={{
               background: `linear-gradient(160deg, ${member.color} 0%, ${member.colorDeep} 100%)`,
               border: `3px solid ${INK}`,
-              boxShadow: `8px 8px 0 ${INK}`,
+              boxShadow: `8px 8px 0 ${gold}`,
             }}
           >
             {/* paint splatter feel */}
             <div
               className="absolute inset-0 opacity-30"
               style={{
-                background: `radial-gradient(circle at 70% 80%, ${INK} 0%, transparent 35%), radial-gradient(circle at 20% 30%, ${BONE}55 0%, transparent 40%)`,
+                background: `radial-gradient(circle at 70% 80%, ${blueDeep} 0%, transparent 35%), radial-gradient(circle at 20% 30%, ${BONE}55 0%, transparent 40%), linear-gradient(45deg, transparent 0%, ${gold}66 48%, transparent 52%)`,
               }}
             />
             {/* Vertical name */}
@@ -175,15 +189,15 @@ export function MemberPage({ member, onBack }: Props) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="p-4 lg:p-5"
               style={{
-                backgroundColor: BONE,
-                border: `2px solid ${INK}`,
-                boxShadow: `5px 5px 0 ${INK}`,
+              backgroundColor: BONE,
+              border: `2px solid ${INK}`,
+                boxShadow: `5px 5px 0 ${blue}`,
               }}
             >
               <div className="flex items-center gap-2 mb-3">
                 <span
                   className="px-1.5 py-0.5 text-[10px] tracking-[0.2em]"
-                  style={{ ...mono, backgroundColor: INK, color: BONE }}
+                  style={{ ...mono, backgroundColor: gold, color: INK }}
                 >
                   DATA FILE
                 </span>
@@ -221,7 +235,7 @@ export function MemberPage({ member, onBack }: Props) {
                 backgroundColor: member.color,
                 color: BONE,
                 border: `2px solid ${INK}`,
-                boxShadow: `5px 5px 0 ${INK}`,
+                boxShadow: `5px 5px 0 ${gold}`,
               }}
             >
               <Quote className="w-5 h-5 mb-2 opacity-80" />

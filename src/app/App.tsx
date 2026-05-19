@@ -20,6 +20,7 @@ import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
 import { landingConfig } from "./landingConfig";
 import { members, findMember } from "./members";
+import { onePieceTheme } from "./onePieceTheme";
 
 type Route =
   | { name: "home" }
@@ -31,13 +32,7 @@ const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
 const mono = { fontFamily: '"JetBrains Mono", monospace' };
 
-const C = {
-  cream: "#F8F8F8",
-  ink: "#0B0B0B",
-  red: "#E2231A",
-  redDeep: "#9A1410",
-  bone: "#F2F2F2",
-};
+const C = onePieceTheme;
 
 const audioTrack = landingConfig.audio.track;
 const heroBackgrounds =
@@ -57,6 +52,9 @@ const crew = [
 const slides = [
   {
     background: heroBackgrounds[0],
+    accent: C.blue,
+    accentDeep: C.blueDeep,
+    warm: C.gold,
     issue: "001",
     kicker: "EAST BLUE // CHAPTER ONE",
     heading: ["SAIL THE", "GRAND", "LINE"],
@@ -69,6 +67,9 @@ const slides = [
   },
   {
     background: heroBackgrounds[1],
+    accent: C.red,
+    accentDeep: C.redDeep,
+    warm: C.seaFoam,
     issue: "002",
     kicker: "NEW WORLD // CHAPTER TWO",
     heading: ["BECOME", "THE PIRATE", "KING"],
@@ -91,15 +92,18 @@ function NavStrip({
   return (
     <div
       className="px-6 lg:px-12 py-4 flex items-center justify-between"
-      style={{ backgroundColor: C.cream, borderBottom: `2px solid ${C.ink}` }}
+      style={{
+        backgroundColor: C.cream,
+        borderBottom: `2px solid ${C.blue}`,
+      }}
     >
       <div
         className="flex items-center gap-2 px-3 py-1.5"
-        style={{ backgroundColor: C.ink }}
+        style={{ backgroundColor: C.ink, boxShadow: `4px 4px 0 ${C.gold}` }}
       >
         <span
           className="text-2xl lg:text-3xl leading-none"
-          style={{ ...display, color: C.red }}
+          style={{ ...display, color: C.blue }}
         >
           ONE
         </span>
@@ -112,7 +116,7 @@ function NavStrip({
       </div>
       <div
         className="flex items-center gap-1 px-2 py-1.5 rounded-full"
-        style={{ backgroundColor: C.ink }}
+        style={{ backgroundColor: C.blueDeep, border: `2px solid ${C.ink}` }}
       >
         {[
           {
@@ -137,7 +141,7 @@ function NavStrip({
             className="px-4 py-1.5 text-sm rounded-full"
             style={{
               color: it.active ? C.ink : C.bone,
-              backgroundColor: it.active ? C.bone : "transparent",
+              backgroundColor: it.active ? C.gold : "transparent",
               fontWeight: it.active ? 600 : 400,
             }}
           >
@@ -161,8 +165,9 @@ function Tag({
       className="inline-block px-2 py-0.5 text-[10px] tracking-[0.15em]"
       style={{
         ...mono,
-        backgroundColor: dark ? C.ink : C.red,
+        backgroundColor: dark ? C.blueDeep : C.red,
         color: dark ? C.bone : C.bone,
+        border: `1px solid ${dark ? C.gold : C.ink}`,
       }}
     >
       {children}
@@ -272,8 +277,8 @@ export default function App() {
         style={{
           backgroundColor: soundEnabled ? C.red : C.ink,
           color: C.bone,
-          border: `2px solid ${C.ink}`,
-          boxShadow: `4px 4px 0 ${C.ink}`,
+          border: `2px solid ${soundEnabled ? C.ink : C.blue}`,
+          boxShadow: `4px 4px 0 ${soundEnabled ? C.gold : C.blue}`,
         }}
         aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
         title={soundEnabled ? "Disable sound" : "Enable sound"}
@@ -327,6 +332,7 @@ export default function App() {
       className="h-screen overflow-hidden flex flex-col relative"
       style={{
         backgroundColor: C.cream,
+        backgroundImage: `linear-gradient(135deg, ${C.cream} 0%, ${C.bone} 44%, ${C.seaFoam}55 100%)`,
         fontFamily: "Inter, sans-serif",
         color: C.ink,
       }}
@@ -342,6 +348,7 @@ export default function App() {
           ...mono,
           zIndex: 10,
           color: C.ink,
+          textShadow: `1px 1px 0 ${C.gold}`,
           writingMode: "vertical-rl",
         }}
       >
@@ -353,6 +360,7 @@ export default function App() {
           ...mono,
           zIndex: 10,
           color: C.ink,
+          textShadow: `1px 1px 0 ${C.gold}`,
           writingMode: "vertical-rl",
         }}
       >
@@ -367,11 +375,11 @@ export default function App() {
           {/* Logo block */}
           <div
             className="flex items-center gap-2 px-3 py-1.5"
-            style={{ backgroundColor: C.ink }}
+            style={{ backgroundColor: C.ink, boxShadow: `4px 4px 0 ${C.gold}` }}
           >
             <span
               className="text-3xl lg:text-4xl leading-none"
-              style={{ ...display, color: C.red }}
+              style={{ ...display, color: C.blue }}
             >
               ONE
             </span>
@@ -389,7 +397,10 @@ export default function App() {
           {/* Nav pill */}
           <div
             className="hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full"
-            style={{ backgroundColor: C.ink, border: `2px solid ${C.ink}` }}
+            style={{
+              backgroundColor: C.blueDeep,
+              border: `2px solid ${C.ink}`,
+            }}
           >
             {[
               {
@@ -416,7 +427,7 @@ export default function App() {
                 className="px-3 lg:px-4 py-1.5 text-sm lg:text-base rounded-full transition"
                 style={{
                   color: item.active ? C.ink : C.bone,
-                  backgroundColor: item.active ? C.bone : "transparent",
+                  backgroundColor: item.active ? C.gold : "transparent",
                   fontWeight: item.active ? 600 : 400,
                 }}
               >
@@ -431,7 +442,7 @@ export default function App() {
               whileTap={{ scale: 0.96 }}
               className="px-4 lg:px-5 py-2 text-sm lg:text-base rounded-full"
               style={{
-                backgroundColor: C.bone,
+                backgroundColor: C.gold,
                 color: C.ink,
                 border: `2px solid ${C.ink}`,
               }}
@@ -446,6 +457,7 @@ export default function App() {
                 backgroundColor: C.red,
                 color: C.bone,
                 border: `2px solid ${C.ink}`,
+                boxShadow: `3px 3px 0 ${C.gold}`,
               }}
             >
               Set Sail
@@ -484,9 +496,15 @@ export default function App() {
                     key={i}
                     className="block text-6xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase"
                     style={{
-                      color: i === 2 ? "transparent" : i === 1 ? C.red : C.ink,
-                      WebkitTextStroke: i === 2 ? `2px ${C.ink}` : undefined,
-                      textShadow: i === 1 ? `4px 4px 0 ${C.ink}` : undefined,
+                      color:
+                        i === 2
+                          ? "transparent"
+                          : i === 1
+                            ? slide.accent
+                            : C.ink,
+                      WebkitTextStroke:
+                        i === 2 ? `2px ${slide.accentDeep}` : undefined,
+                      textShadow: i === 1 ? `4px 4px 0 ${C.gold}` : undefined,
                     }}
                   >
                     {line}
@@ -496,7 +514,7 @@ export default function App() {
               <div className="flex items-baseline gap-3 mb-4">
                 <span
                   className="text-2xl lg:text-3xl"
-                  style={{ ...jp, color: C.red, fontWeight: 900 }}
+                  style={{ ...jp, color: slide.accentDeep, fontWeight: 900 }}
                 >
                   {slide.jpHead}
                 </span>
@@ -515,9 +533,10 @@ export default function App() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-3 pl-6 pr-1.5 py-1.5 rounded-full"
                 style={{
-                  backgroundColor: C.ink,
+                  backgroundColor: C.blueDeep,
                   color: C.bone,
                   border: `2px solid ${C.ink}`,
+                  boxShadow: `4px 4px 0 ${C.gold}`,
                 }}
               >
                 <span
@@ -555,7 +574,7 @@ export default function App() {
                 style={{
                   backgroundColor: C.bone,
                   border: `2px solid ${C.ink}`,
-                  boxShadow: `6px 6px 0 ${C.ink}`,
+                  boxShadow: `6px 6px 0 ${slide.accent}`,
                 }}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -567,7 +586,7 @@ export default function App() {
                 <div className="flex items-end gap-2 mb-1">
                   <span
                     className="text-6xl lg:text-7xl leading-[0.85]"
-                    style={{ ...display, color: C.red }}
+                    style={{ ...display, color: slide.accent }}
                   >
                     {slide.stat}
                   </span>
@@ -596,7 +615,7 @@ export default function App() {
                   <span className="opacity-60">SEA</span>
                   <span className="text-right">GRAND LINE</span>
                   <span className="opacity-60">STATUS</span>
-                  <span className="text-right" style={{ color: C.red }}>
+                  <span className="text-right" style={{ color: slide.accent }}>
                     ● ACTIVE
                   </span>
                 </div>
@@ -610,7 +629,7 @@ export default function App() {
           <div className="flex items-start gap-4">
             <div
               className="px-2 py-1 text-[10px] tracking-[0.2em] flex-shrink-0"
-              style={{ ...mono, backgroundColor: C.ink, color: C.bone }}
+              style={{ ...mono, backgroundColor: C.gold, color: C.ink }}
             >
               MANIFESTO
             </div>
@@ -631,7 +650,8 @@ export default function App() {
                     whileTap={{ scale: 0.95 }}
                     className="w-9 h-9 rounded-full flex items-center justify-center"
                     style={{
-                      backgroundColor: C.ink,
+                      backgroundColor:
+                        i === 0 ? C.blue : i === 1 ? C.red : C.gold,
                       color: C.bone,
                       border: `2px solid ${C.ink}`,
                     }}
@@ -657,7 +677,7 @@ export default function App() {
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                   className="h-2"
                   style={{
-                    backgroundColor: i === index ? C.red : C.ink,
+                    backgroundColor: i === index ? slide.accent : C.ink,
                     opacity: i === index ? 1 : 0.4,
                   }}
                   aria-label={`Slide ${i + 1}`}
@@ -678,6 +698,7 @@ export default function App() {
             backgroundColor: C.red,
             color: C.bone,
             border: `2px solid ${C.ink}`,
+            boxShadow: `4px 4px 0 ${C.gold}`,
           }}
         >
           <Users className="w-4 h-4" />
@@ -689,7 +710,7 @@ export default function App() {
           </span>
           <span
             className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: C.ink }}
+            style={{ backgroundColor: C.blueDeep }}
           >
             <ArrowRight className="w-4 h-4" style={{ color: C.bone }} />
           </span>
@@ -699,7 +720,7 @@ export default function App() {
           style={{
             backgroundColor: C.bone,
             border: `2px solid ${C.ink}`,
-            boxShadow: `4px 4px 0 ${C.ink}`,
+            boxShadow: `4px 4px 0 ${C.blue}`,
           }}
         >
           <div className="flex items-center gap-3">
@@ -749,6 +770,7 @@ export default function App() {
               backgroundColor: C.red,
               color: C.bone,
               border: `2px solid ${C.ink}`,
+              boxShadow: `4px 4px 0 ${C.gold}`,
             }}
           >
             <Users className="w-4 h-4" />
@@ -767,6 +789,6 @@ export default function App() {
           </motion.button>
         </div>
       </main>
-    </div>
+    </div>,
   );
 }
