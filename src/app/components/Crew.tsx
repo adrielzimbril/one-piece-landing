@@ -24,6 +24,7 @@ const memberImages: Record<string, string[]> = {
   sanji: ["/assets/sanji.jpeg", "/assets/sanji-1.jpeg"],
   usopp: ["/assets/usopp.jpeg", "/assets/usopp-1.jpeg"],
   zoro: ["/assets/zoro.jpeg", "/assets/zoro-1.jpeg"],
+  jinbe: ["/assets/jimbe.jpeg", "/assets/jimbe-1.jpeg"],
 };
 
 type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
@@ -156,7 +157,10 @@ export function Crew({ onSelect, setRoute }: Props) {
               >
                 PIECE
               </span>
-              <span className="ml-1 hidden text-xs sm:inline" style={{ ...jp, color: C.bone }}>
+              <span
+                className="ml-1 hidden text-xs sm:inline"
+                style={{ ...jp, color: C.bone }}
+              >
                 海賊
               </span>
             </button>
@@ -166,9 +170,21 @@ export function Crew({ onSelect, setRoute }: Props) {
               style={{ backgroundColor: C.ink, border: `2px solid ${C.ink}` }}
             >
               {[
-                { label: "Home", active: false, go: () => setRoute({ name: "home" }) },
-                { label: "Crew", active: true, go: () => setRoute({ name: "crew" }) },
-                { label: "Gears", active: false, go: () => setRoute({ name: "gears" }) },
+                {
+                  label: "Home",
+                  active: false,
+                  go: () => setRoute({ name: "home" }),
+                },
+                {
+                  label: "Crew",
+                  active: true,
+                  go: () => setRoute({ name: "crew" }),
+                },
+                {
+                  label: "Gears",
+                  active: false,
+                  go: () => setRoute({ name: "gears" }),
+                },
               ].map((item) => (
                 <button
                   key={item.label}
@@ -207,7 +223,10 @@ export function Crew({ onSelect, setRoute }: Props) {
                 Straw Hat
                 <span
                   className="block"
-                  style={{ color: active.color, textShadow: `4px 4px 0 ${C.ink}` }}
+                  style={{
+                    color: active.color,
+                    textShadow: `4px 4px 0 ${C.ink}`,
+                  }}
                 >
                   Pirates
                 </span>
@@ -295,7 +314,10 @@ export function Crew({ onSelect, setRoute }: Props) {
                   border: `2px solid ${C.ink}`,
                 }}
               >
-                <span className="text-sm tracking-[0.2em] lg:text-base" style={display}>
+                <span
+                  className="text-sm tracking-[0.2em] lg:text-base"
+                  style={display}
+                >
                   VIEW FILE
                 </span>
                 <span
