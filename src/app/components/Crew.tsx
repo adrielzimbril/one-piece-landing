@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ArrowUpRight, Skull } from "lucide-react";
 import { members } from "../members";
+import brookImage from "../../imports/brook.jpeg";
+import robinImage from "../../imports/robin.jpeg";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
@@ -14,6 +16,11 @@ const C = {
   red: "#E2231A",
 };
 
+const memberImages: Record<string, string> = {
+  brook: brookImage,
+  robin: robinImage,
+};
+
 type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
 
 type Props = {
@@ -24,6 +31,7 @@ type Props = {
 export function Crew({ onSelect, setRoute }: Props) {
   const [index, setIndex] = useState(0);
   const active = members[index];
+  const activeImage = memberImages[active.id];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -56,7 +64,16 @@ export function Crew({ onSelect, setRoute }: Props) {
           style={{
             background: `radial-gradient(circle at 72% 28%, ${active.color}AA 0%, transparent 30%), radial-gradient(circle at 83% 72%, ${active.colorDeep}99 0%, transparent 34%), linear-gradient(135deg, ${active.color} 0%, ${active.colorDeep} 100%)`,
           }}
-        />
+        >
+          {activeImage ? (
+            <img
+              src={activeImage}
+              alt=""
+              className="h-full w-full object-cover"
+              aria-hidden="true"
+            />
+          ) : null}
+        </motion.div>
       </AnimatePresence>
 
       <div

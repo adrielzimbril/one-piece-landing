@@ -10,6 +10,7 @@ export type Member = {
   bio: string;
   color: string;
   colorDeep: string;
+  image?: string;
   bg?: string;
 };
 
