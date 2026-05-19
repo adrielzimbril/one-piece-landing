@@ -250,61 +250,72 @@ export default function App() {
 
     audio.volume = 0.45;
     audio.muted = false;
+    audio.preload = "auto";
     audio.load();
 
-    const stopRetrying = () => {
-      if (audioRetryRef.current === null) return;
+    let hasPlayed = false;
 
-      window.clearInterval(audioRetryRef.current);
-      audioRetryRef.current = null;
-    };
-
-    const playAudio = async () => {
-      if (!soundEnabledRef.current) {
-        stopRetrying();
-        return;
-      }
-
-      if (!audio.paused && audio.readyState > 2) {
-        stopRetrying();
-        return;
-      }
-
-      audio.load();
-      audio.muted = false;
-      audio.volume = 0.45;
+    const tryPlay = async () => {
+      if (!soundEnabledRef.current || hasPlayed) return;
 
       try {
         await audio.play();
-        stopRetrying();
-      } catch {
-        if (audioRetryRef.current === null && soundEnabledRef.current) {
-          audioRetryRef.current = window.setInterval(() => {
-            void playAudio();
-          }, 700);
-        }
-      }
+        hasPlayed = true;
+        removeListeners();
+      } catch {}
     };
 
-    void playAudio();
+    void tryPlay();
 
-    window.addEventListener("pointerdown", playAudio, { once: true });
-    window.addEventListener("keydown", playAudio, { once: true });
-    window.addEventListener("touchstart", playAudio, { once: true });
-    document.addEventListener("visibilitychange", playAudio);
-    audio.addEventListener("canplay", playAudio);
-    audio.addEventListener("canplaythrough", playAudio);
-    audio.addEventListener("playing", stopRetrying);
+    const EVENTS = [
+      "pointerdown",
+      "pointerup",
+      "pointermove",
+      "pointerenter",
+      "pointerover",
+
+      "mousedown",
+      "mouseup",
+      "mousemove",
+      "mouseenter",
+      "mouseover",
+      "wheel",
+
+      "touchstart",
+      "touchend",
+      "touchmove",
+
+      "keydown",
+      "keyup",
+
+      "scroll",
+
+      "focus",
+      "focusin",
+
+      "visibilitychange",
+    ] as const;
+
+    const onInteraction = () => void tryPlay();
+
+    const removeListeners = () => {
+      EVENTS.forEach((e) =>
+        document.removeEventListener(e, onInteraction, true),
+      );
+    };
+
+    EVENTS.forEach((e) =>
+      document.addEventListener(e, onInteraction, {
+        capture: true,
+        once: true,
+      }),
+    );
+
+    audio.addEventListener("canplaythrough", tryPlay, { once: true });
 
     return () => {
-      stopRetrying();
-      window.removeEventListener("pointerdown", playAudio);
-      window.removeEventListener("keydown", playAudio);
-      window.removeEventListener("touchstart", playAudio);
-      document.removeEventListener("visibilitychange", playAudio);
-      audio.removeEventListener("canplay", playAudio);
-      audio.removeEventListener("canplaythrough", playAudio);
-      audio.removeEventListener("playing", stopRetrying);
+      removeListeners();
+      audio.removeEventListener("canplaythrough", tryPlay);
     };
   }, []);
 
