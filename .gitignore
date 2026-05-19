@@ -51,3 +51,4 @@ design.md
 
 .vercel
 /dist
+.vite-*.log
