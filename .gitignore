@@ -50,3 +50,4 @@ design.md
 .design-files/
 
 .vercel
+/dist
