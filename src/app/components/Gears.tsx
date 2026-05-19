@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Zap, Flame, Wind, Activity, Sun } from "lucide-react";
+import gear1 from "../../imports/gear-1.jpeg";
+import gear2 from "../../imports/gear-2.jpeg";
+import gear3 from "../../imports/gear-3.jpeg";
+import gear4 from "../../imports/gear-4.jpeg";
+import gear5 from "../../imports/gear5.jpeg";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
@@ -23,9 +28,25 @@ type Gear = {
   Icon: typeof Zap;
   model: string;
   unlocked: string;
+  image: string;
 };
 
 const gears: Gear[] = [
+  {
+    id: "g1",
+    num: "01",
+    name: "Base Form",
+    jp: "ゴム人間",
+    tagline: "Rubber Body",
+    desc: "The original Gum-Gum fighting style. Elastic strikes, reckless momentum, and the grin that starts every impossible fight.",
+    accent: "#0EA5E9",
+    accentDeep: "#075985",
+    splat: "#0EA5E9",
+    Icon: Zap,
+    model: "GUM-GUM // ORIGIN",
+    unlocked: "EAST BLUE",
+    image: gear1,
+  },
   {
     id: "g2",
     num: "02",
@@ -39,6 +60,7 @@ const gears: Gear[] = [
     Icon: Wind,
     model: "GUM-GUM // ACCEL",
     unlocked: "ENIES LOBBY",
+    image: gear2,
   },
   {
     id: "g3",
@@ -53,6 +75,7 @@ const gears: Gear[] = [
     Icon: Activity,
     model: "GUM-GUM // GIANT",
     unlocked: "WATER 7",
+    image: gear3,
   },
   {
     id: "g4",
@@ -67,6 +90,7 @@ const gears: Gear[] = [
     Icon: Flame,
     model: "GUM-GUM // HAKI",
     unlocked: "DRESSROSA",
+    image: gear4,
   },
   {
     id: "g5",
@@ -81,11 +105,12 @@ const gears: Gear[] = [
     Icon: Sun,
     model: "HITO HITO // NIKA",
     unlocked: "EGGHEAD",
+    image: gear5,
   },
 ];
 
 export function Gears() {
-  const [active, setActive] = useState<Gear>(gears[3]);
+  const [active, setActive] = useState<Gear>(gears[4]);
 
   return (
     <div
@@ -113,7 +138,7 @@ export function Gears() {
                 className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
                 style={{ ...mono, backgroundColor: INK, color: BONE }}
               >
-                ARSENAL // 04
+                ARSENAL // 05
               </span>
               <span className="text-[11px] tracking-[0.2em]" style={mono}>
                 LUFFY // GEAR TRANSFORMATIONS
@@ -188,11 +213,26 @@ export function Gears() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-8 relative aspect-[16/10] lg:aspect-[16/9] overflow-hidden"
               style={{
-                background: `radial-gradient(circle at 30% 80%, ${active.splat}55 0%, transparent 40%), radial-gradient(circle at 80% 20%, ${active.accent}66 0%, transparent 45%), ${BONE}`,
+                backgroundColor: BONE,
                 border: `3px solid ${INK}`,
                 boxShadow: `8px 8px 0 ${INK}`,
               }}
             >
+              <motion.img
+                key={`image-${active.id}`}
+                src={active.image}
+                alt={`${active.name} Luffy artwork`}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(90deg, ${BONE}DD 0%, ${BONE}44 34%, transparent 62%), linear-gradient(0deg, ${INK}99 0%, transparent 38%)`,
+                }}
+              />
               {/* Left vertical LUFFY */}
               <div
                 className="absolute left-4 top-4 bottom-4 flex items-start"
@@ -200,7 +240,11 @@ export function Gears() {
               >
                 <span
                   className="text-7xl lg:text-9xl leading-none uppercase"
-                  style={{ ...display, color: INK }}
+                  style={{
+                    ...display,
+                    color: INK,
+                    textShadow: `2px 2px 0 ${BONE}`,
+                  }}
                 >
                   Luffy ✦ Gear {active.num}
                 </span>
@@ -224,17 +268,20 @@ export function Gears() {
                 </div>
                 <div
                   className="text-3xl lg:text-4xl uppercase"
-                  style={{ ...display, color: INK }}
+                  style={{
+                    ...display,
+                    color: BONE,
+                    textShadow: `3px 3px 0 ${INK}`,
+                  }}
                 >
                   {active.tagline}
                 </div>
               </div>
-              {/* Placeholder tag */}
               <div
                 className="absolute bottom-4 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] tracking-[0.25em]"
                 style={{ ...mono, backgroundColor: INK, color: BONE }}
               >
-                // BACKGROUND PENDING
+                // GEAR VISUAL ARCHIVE
               </div>
             </motion.div>
           </AnimatePresence>
