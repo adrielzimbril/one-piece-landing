@@ -14,6 +14,7 @@ import {
   Users,
 } from "lucide-react";
 import heroVideo from "../imports/video.mp4";
+import heroVideo2 from "../imports/video-1.mp4";
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
@@ -48,6 +49,7 @@ const crew = [
 
 const slides = [
   {
+    video: heroVideo,
     issue: "001",
     kicker: "EAST BLUE // CHAPTER ONE",
     heading: ["SAIL THE", "GRAND", "LINE"],
@@ -59,6 +61,7 @@ const slides = [
     bounty: "3,000,000,000",
   },
   {
+    video: heroVideo2,
     issue: "002",
     kicker: "NEW WORLD // CHAPTER TWO",
     heading: ["BECOME", "THE PIRATE", "KING"],
@@ -214,17 +217,24 @@ export default function App() {
         color: C.ink,
       }}
     >
-      <video
-        src={heroVideo}
-        className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
-        style={{ zIndex: 0 }}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
+      <AnimatePresence mode="sync">
+        <motion.video
+          key={slide.video}
+          src={slide.video}
+          className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
+          style={{ zIndex: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        />
+      </AnimatePresence>
 
       {/* Vertical side label */}
       <div
