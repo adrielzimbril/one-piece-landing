@@ -132,9 +132,9 @@ export function Crew({ onSelect, setRoute }: Props) {
         NO.{String(index + 1).padStart(3, "0")} // {active.role.toUpperCase()}
       </div>
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-4 lg:px-12 lg:py-5">
-        <div className="flex flex-col gap-4 lg:gap-5">
-          <nav className="flex items-center justify-between gap-4">
+      <div className="relative z-10 flex h-full flex-col justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-12 lg:py-5">
+        <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
+          <nav className="flex items-center justify-between gap-3 lg:gap-4">
             <button
               type="button"
               onClick={() => setRoute({ name: "home" })}
@@ -147,13 +147,13 @@ export function Crew({ onSelect, setRoute }: Props) {
               aria-label="Go home"
             >
               <span
-                className="text-3xl leading-none lg:text-4xl"
+                className="text-2xl leading-none sm:text-3xl lg:text-4xl"
                 style={{ ...display, color: C.red }}
               >
                 ONE
               </span>
               <span
-                className="text-3xl leading-none lg:text-4xl"
+                className="text-2xl leading-none sm:text-3xl lg:text-4xl"
                 style={{ ...display, color: C.ink }}
               >
                 PIECE
@@ -222,7 +222,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                 </span>
               </div>
               <h1
-                className="text-5xl uppercase leading-[0.82] sm:text-6xl lg:text-8xl xl:text-[8.75rem]"
+                className="text-4xl uppercase leading-[0.82] sm:text-6xl lg:text-8xl xl:text-[8.75rem]"
                 style={{ ...display, color: C.ink }}
               >
                 Straw Hat
@@ -255,7 +255,7 @@ export function Crew({ onSelect, setRoute }: Props) {
           </div>
         </div>
 
-        <div className="grid items-end gap-4 lg:grid-cols-12 lg:gap-8">
+        <div className="grid items-end gap-3 sm:gap-4 lg:grid-cols-12 lg:gap-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={`copy-${active.id}`}
@@ -267,7 +267,7 @@ export function Crew({ onSelect, setRoute }: Props) {
             >
               <div className="mb-1 flex items-center gap-3">
                 <span
-                  className="text-6xl leading-none lg:text-8xl"
+                  className="text-5xl leading-none sm:text-6xl lg:text-8xl"
                   style={{
                     ...display,
                     color: active.color,
@@ -281,7 +281,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                     // ROLE
                   </div>
                   <div
-                    className="text-3xl uppercase leading-none lg:text-4xl"
+                    className="text-2xl uppercase leading-none sm:text-3xl lg:text-4xl"
                     style={{ ...display, color: C.ink }}
                   >
                     {active.role}
@@ -289,13 +289,13 @@ export function Crew({ onSelect, setRoute }: Props) {
                 </div>
               </div>
               <h2
-                className="mb-1 text-4xl uppercase leading-[0.9] lg:text-6xl"
+                className="mb-1 text-3xl uppercase leading-[0.9] sm:text-4xl lg:text-6xl"
                 style={display}
               >
                 {active.name}
               </h2>
               <div
-                className="mb-3 text-2xl lg:text-3xl"
+                className="mb-2 text-xl sm:mb-3 sm:text-2xl lg:text-3xl"
                 style={{
                   ...jp,
                   color: active.colorDeep,
@@ -304,7 +304,7 @@ export function Crew({ onSelect, setRoute }: Props) {
               >
                 {active.jp}
               </div>
-              <p className="max-w-xl text-sm leading-relaxed lg:text-base">
+              <p className="max-w-xl text-xs leading-relaxed sm:text-sm lg:text-base">
                 {active.bio}
               </p>
               <motion.button
@@ -312,7 +312,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                 onClick={() => onSelect(active.id)}
                 whileHover={{ scale: 1.04, x: 4 }}
                 whileTap={{ scale: 0.97 }}
-                className="mt-5 inline-flex items-center gap-3 rounded-full py-1.5 pl-5 pr-1.5"
+                className="mt-3 inline-flex items-center gap-3 rounded-full py-1.5 pl-5 pr-1.5 sm:mt-5"
                 style={{
                   backgroundColor: active.color,
                   color: C.bone,
@@ -343,7 +343,7 @@ export function Crew({ onSelect, setRoute }: Props) {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 16 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5 lg:justify-self-end"
+              className="hidden lg:col-span-5 lg:block lg:justify-self-end"
             >
               <div
                 className="w-full max-w-md p-4 lg:p-5"
@@ -384,8 +384,8 @@ export function Crew({ onSelect, setRoute }: Props) {
           </AnimatePresence>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 flex-1 flex-nowrap items-center gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
             {members.map((member, memberIndex) => {
               const isActive = member.id === active.id;
               return (
@@ -395,7 +395,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   onClick={() => setIndex(memberIndex)}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-2"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full px-3 py-2"
                   style={{
                     backgroundColor: isActive ? member.color : C.bone,
                     color: isActive ? C.bone : C.ink,
@@ -416,7 +416,7 @@ export function Crew({ onSelect, setRoute }: Props) {
             })}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="hidden shrink-0 items-center gap-3 sm:flex">
             <span className="text-[10px] tracking-[0.3em]" style={mono}>
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(members.length).padStart(2, "0")}

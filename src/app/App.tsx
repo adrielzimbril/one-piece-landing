@@ -427,7 +427,7 @@ export default function App() {
 
       {/* Vertical side label */}
       <div
-        className="fixed left-3 top-1/2 -translate-y-1/2 text-[10px] tracking-[0.4em]"
+        className="fixed left-3 top-1/2 hidden -translate-y-1/2 text-[10px] tracking-[0.4em] md:block"
         style={{
           ...mono,
           zIndex: 10,
@@ -439,7 +439,7 @@ export default function App() {
         ONE PIECE // ワンピース // EST. 1997
       </div>
       <div
-        className="fixed right-3 top-1/2 -translate-y-1/2 text-[10px] tracking-[0.4em]"
+        className="fixed right-3 top-1/2 hidden -translate-y-1/2 text-[10px] tracking-[0.4em] md:block"
         style={{
           ...mono,
           zIndex: 10,
@@ -452,10 +452,10 @@ export default function App() {
       </div>
 
       <header
-        className="relative px-6 lg:px-12 py-4 lg:py-5 flex-shrink-0"
+        className="relative flex-shrink-0 px-4 py-3 sm:px-6 lg:px-12 lg:py-5"
         style={{ zIndex: 10 }}
       >
-        <nav className="flex items-center justify-between gap-4">
+        <nav className="flex items-center justify-between gap-3 lg:gap-4">
           {/* Logo block */}
           <div
             className="flex items-center gap-2 px-3 py-1.5"
@@ -464,18 +464,18 @@ export default function App() {
             }}
           >
             <span
-              className="text-3xl lg:text-4xl leading-none"
+              className="text-2xl leading-none sm:text-3xl lg:text-4xl"
               style={{ ...display, color: C.red }}
             >
               ONE
             </span>
             <span
-              className="text-3xl lg:text-4xl leading-none"
+              className="text-2xl leading-none sm:text-3xl lg:text-4xl"
               style={{ ...display, color: C.bone }}
             >
               PIECE
             </span>
-            <span className="text-xs ml-1" style={{ ...jp, color: C.bone }}>
+            <span className="ml-1 hidden text-xs sm:inline" style={{ ...jp, color: C.bone }}>
               海賊
             </span>
           </div>
@@ -526,7 +526,7 @@ export default function App() {
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="px-4 lg:px-5 py-2 text-sm lg:text-base rounded-full"
+              className="hidden rounded-full px-4 py-2 text-sm sm:inline-flex lg:px-5 lg:text-base"
               style={{
                 backgroundColor: C.gold,
                 color: C.ink,
@@ -538,7 +538,7 @@ export default function App() {
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="px-4 lg:px-5 py-2 text-sm lg:text-base rounded-full"
+              className="rounded-full px-3 py-2 text-sm sm:px-4 lg:px-5 lg:text-base"
               style={{
                 backgroundColor: C.red,
                 color: C.bone,
@@ -553,11 +553,11 @@ export default function App() {
       </header>
 
       <main
-        className="relative px-6 lg:px-12 py-4 lg:py-6 flex-1 flex flex-col justify-between"
+        className="relative flex flex-1 flex-col justify-between px-4 py-2 sm:px-6 sm:py-4 lg:px-12 lg:py-6"
         style={{ zIndex: 10 }}
       >
         {/* TOP ROW */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 gap-3 sm:gap-5 lg:grid-cols-12 lg:gap-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={`l-${index}`}
@@ -567,7 +567,7 @@ export default function App() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-7"
             >
-              <div className="flex items-center gap-2 mb-3">
+              <div className="mb-2 flex items-center gap-2 sm:mb-3">
                 <Tag>ISSUE {slide.issue}</Tag>
                 <span className="text-[11px] tracking-[0.2em]" style={mono}>
                   {slide.kicker}
@@ -580,7 +580,7 @@ export default function App() {
                 {slide.heading.map((line, i) => (
                   <span
                     key={i}
-                    className="block text-6xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase"
+                    className="block text-5xl uppercase sm:text-7xl lg:text-8xl xl:text-9xl"
                     style={{
                       color:
                         i === 2
@@ -597,9 +597,9 @@ export default function App() {
                   </span>
                 ))}
               </h1>
-              <div className="flex items-baseline gap-3 mb-4">
+              <div className="mb-3 flex items-baseline gap-2 sm:mb-4 sm:gap-3">
                 <span
-                  className="text-2xl lg:text-3xl"
+                  className="text-xl sm:text-2xl lg:text-3xl"
                   style={{ ...jp, color: slide.accentDeep, fontWeight: 900 }}
                 >
                   {slide.jpHead}
@@ -609,7 +609,7 @@ export default function App() {
                 </span>
               </div>
               <p
-                className="text-base lg:text-lg mb-5 max-w-md"
+                className="mb-3 max-w-md text-sm leading-relaxed sm:mb-5 sm:text-base lg:text-lg"
                 style={{ color: C.ink }}
               >
                 {slide.sub}
@@ -617,7 +617,7 @@ export default function App() {
               <motion.button
                 whileHover={{ scale: 1.04, x: 4 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 pl-6 pr-1.5 py-1.5 rounded-full"
+                className="inline-flex items-center gap-3 rounded-full py-1.5 pl-5 pr-1.5 sm:pl-6"
                 style={{
                   backgroundColor: C.ink,
                   color: C.bone,
@@ -652,7 +652,7 @@ export default function App() {
                 delay: 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="lg:col-span-5 lg:justify-self-end w-full max-w-sm"
+              className="hidden w-full max-w-sm sm:block lg:col-span-5 lg:justify-self-end"
             >
               <div
                 className="p-4 lg:p-5"
@@ -710,8 +710,8 @@ export default function App() {
         </div>
 
         {/* MIDDLE ROW */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-end">
-          <div className="flex items-start gap-4">
+        <div className="grid grid-cols-1 items-end gap-3 sm:gap-5 lg:grid-cols-2 lg:gap-12">
+          <div className="hidden items-start gap-4 sm:flex">
             <div
               className="px-2 py-1 text-[10px] tracking-[0.2em] flex-shrink-0"
               style={{ ...mono, backgroundColor: C.gold, color: C.ink }}
@@ -747,7 +747,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3">
+          <div className="flex items-center justify-center gap-3 sm:justify-end">
             <span className="text-[10px] tracking-[0.3em]" style={mono}>
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(slides.length).padStart(2, "0")}
@@ -777,7 +777,7 @@ export default function App() {
           whileHover={{ scale: 1.04, x: 4 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => setRoute({ name: "crew" })}
-          className="inline-flex w-fit mx-auto items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full"
+          className="mx-auto inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-5 pr-1.5"
           style={{
             backgroundColor: slide.accent,
             color: C.bone,
