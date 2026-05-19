@@ -139,24 +139,28 @@ export function Crew({ onSelect, setRoute }: Props) {
               type="button"
               onClick={() => setRoute({ name: "home" })}
               className="flex items-center gap-2 px-3 py-1.5"
-              style={{ backgroundColor: C.ink, boxShadow: `4px 4px 0 ${C.gold}` }}
+              style={{
+                backgroundColor: C.cream,
+                border: `2px solid ${C.ink}`,
+                boxShadow: `4px 4px 0 ${C.blue}`,
+              }}
               aria-label="Go home"
             >
               <span
                 className="text-3xl leading-none lg:text-4xl"
-                style={{ ...display, color: active.color }}
+                style={{ ...display, color: C.red }}
               >
                 ONE
               </span>
               <span
                 className="text-3xl leading-none lg:text-4xl"
-                style={{ ...display, color: C.bone }}
+                style={{ ...display, color: C.blue }}
               >
                 PIECE
               </span>
               <span
                 className="ml-1 hidden text-xs sm:inline"
-                style={{ ...jp, color: C.bone }}
+                style={{ ...jp, color: C.ink }}
               >
                 海賊
               </span>
@@ -222,7 +226,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   className="block"
                   style={{
                     color: active.color,
-                    textShadow: `4px 4px 0 ${C.gold}`,
+                    textShadow: `4px 4px 0 ${C.ink}`,
                   }}
                 >
                   Pirates
@@ -238,7 +242,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                 style={{
                   ...display,
                   color: active.color,
-                  textShadow: `2px 2px 0 ${C.gold}`,
+                  textShadow: `2px 2px 0 ${C.ink}`,
                 }}
               >
                 ฿ 8,816,001,000
@@ -263,7 +267,7 @@ export function Crew({ onSelect, setRoute }: Props) {
                   style={{
                     ...display,
                     color: active.color,
-                    textShadow: `4px 4px 0 ${C.gold}`,
+                    textShadow: `4px 4px 0 ${C.ink}`,
                   }}
                 >
                   {String(index + 1).padStart(2, "0")}

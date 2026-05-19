@@ -99,17 +99,21 @@ function NavStrip({
     >
       <div
         className="flex items-center gap-2 px-3 py-1.5"
-        style={{ backgroundColor: C.ink, boxShadow: `4px 4px 0 ${C.gold}` }}
+        style={{
+          backgroundColor: C.cream,
+          border: `2px solid ${C.ink}`,
+          boxShadow: `4px 4px 0 ${C.blue}`,
+        }}
       >
         <span
           className="text-2xl lg:text-3xl leading-none"
-          style={{ ...display, color: C.blue }}
+          style={{ ...display, color: C.red }}
         >
           ONE
         </span>
         <span
           className="text-2xl lg:text-3xl leading-none"
-          style={{ ...display, color: C.bone }}
+          style={{ ...display, color: C.blue }}
         >
           PIECE
         </span>
@@ -348,7 +352,7 @@ export default function App() {
           ...mono,
           zIndex: 10,
           color: C.ink,
-          textShadow: `1px 1px 0 ${C.gold}`,
+          textShadow: `1px 1px 0 ${C.bone}`,
           writingMode: "vertical-rl",
         }}
       >
@@ -360,7 +364,7 @@ export default function App() {
           ...mono,
           zIndex: 10,
           color: C.ink,
-          textShadow: `1px 1px 0 ${C.gold}`,
+          textShadow: `1px 1px 0 ${C.bone}`,
           writingMode: "vertical-rl",
         }}
       >
@@ -375,21 +379,25 @@ export default function App() {
           {/* Logo block */}
           <div
             className="flex items-center gap-2 px-3 py-1.5"
-            style={{ backgroundColor: C.ink, boxShadow: `4px 4px 0 ${C.gold}` }}
+            style={{
+              backgroundColor: C.cream,
+              border: `2px solid ${C.ink}`,
+              boxShadow: `4px 4px 0 ${C.blue}`,
+            }}
           >
             <span
               className="text-3xl lg:text-4xl leading-none"
-              style={{ ...display, color: C.blue }}
+              style={{ ...display, color: C.red }}
             >
               ONE
             </span>
             <span
               className="text-3xl lg:text-4xl leading-none"
-              style={{ ...display, color: C.bone }}
+              style={{ ...display, color: C.blue }}
             >
               PIECE
             </span>
-            <span className="text-xs ml-1" style={{ ...jp, color: C.bone }}>
+            <span className="text-xs ml-1" style={{ ...jp, color: C.ink }}>
               海賊
             </span>
           </div>
@@ -504,7 +512,7 @@ export default function App() {
                             : C.ink,
                       WebkitTextStroke:
                         i === 2 ? `2px ${slide.accentDeep}` : undefined,
-                      textShadow: i === 1 ? `4px 4px 0 ${C.gold}` : undefined,
+                      textShadow: i === 1 ? `4px 4px 0 ${C.ink}` : undefined,
                     }}
                   >
                     {line}
