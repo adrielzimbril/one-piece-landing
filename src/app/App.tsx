@@ -380,9 +380,7 @@ export default function App() {
           <div
             className="flex items-center gap-2 px-3 py-1.5"
             style={{
-              backgroundColor: C.cream,
-              border: `2px solid ${C.ink}`,
-              boxShadow: `4px 4px 0 ${C.blue}`,
+              backgroundColor: C.ink,
             }}
           >
             <span
@@ -393,11 +391,11 @@ export default function App() {
             </span>
             <span
               className="text-3xl lg:text-4xl leading-none"
-              style={{ ...display, color: C.blue }}
+              style={{ ...display, color: C.bone }}
             >
               PIECE
             </span>
-            <span className="text-xs ml-1" style={{ ...jp, color: C.ink }}>
+            <span className="text-xs ml-1" style={{ ...jp, color: C.bone }}>
               海賊
             </span>
           </div>
@@ -406,7 +404,7 @@ export default function App() {
           <div
             className="hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full"
             style={{
-              backgroundColor: C.blueDeep,
+              backgroundColor: C.ink,
               border: `2px solid ${C.ink}`,
             }}
           >
@@ -435,7 +433,7 @@ export default function App() {
                 className="px-3 lg:px-4 py-1.5 text-sm lg:text-base rounded-full transition"
                 style={{
                   color: item.active ? C.ink : C.bone,
-                  backgroundColor: item.active ? C.gold : "transparent",
+                  backgroundColor: item.active ? C.bone : "transparent",
                   fontWeight: item.active ? 600 : 400,
                 }}
               >
@@ -541,10 +539,9 @@ export default function App() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-3 pl-6 pr-1.5 py-1.5 rounded-full"
                 style={{
-                  backgroundColor: C.blueDeep,
+                  backgroundColor: C.ink,
                   color: C.bone,
                   border: `2px solid ${C.ink}`,
-                  boxShadow: `4px 4px 0 ${C.gold}`,
                 }}
               >
                 <span
@@ -658,10 +655,9 @@ export default function App() {
                     whileTap={{ scale: 0.95 }}
                     className="w-9 h-9 rounded-full flex items-center justify-center"
                     style={{
-                      backgroundColor:
-                        i === 0 ? C.blue : i === 1 ? C.red : C.gold,
+                      backgroundColor: C.ink,
                       color: C.bone,
-                      border: `2px solid ${C.ink}`,
+                      border: `2px solid ${i === 0 ? C.blue : i === 1 ? C.red : C.gold}`,
                     }}
                   >
                     <Icon className="w-4 h-4" />
