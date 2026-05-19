@@ -249,10 +249,10 @@ export default function App() {
 
   if (route.name === "crew") {
     return withAudio(
-      <div>
-        <NavStrip route={route} setRoute={setRoute} />
-        <Crew onSelect={(id) => setRoute({ name: "member", id })} />
-      </div>
+      <Crew
+        onSelect={(id) => setRoute({ name: "member", id })}
+        setRoute={setRoute}
+      />,
     );
   }
   if (route.name === "gears") {
@@ -262,10 +262,10 @@ export default function App() {
     const m = findMember(route.id);
     if (!m) {
       return withAudio(
-        <div>
-          <NavStrip route={{ name: "crew" }} setRoute={setRoute} />
-          <Crew onSelect={(id) => setRoute({ name: "member", id })} />
-        </div>
+        <Crew
+          onSelect={(id) => setRoute({ name: "member", id })}
+          setRoute={setRoute}
+        />,
       );
     }
     return withAudio(
