@@ -1,46 +1,47 @@
-# 🌿 Haumea — Somatic Renewal & Circadian Intelligence Landing Page
+# One Piece Landing - Cinematic Straw Hat Crew Showcase
 
-> **Day 17/30 of the "Building 1 AI-Generated Landing Page Every Day" Challenge**
+> Day 18/30 of the "Building 1 AI-Generated Landing Page Every Day" Challenge
 
 ![preview](public/opengraph-image.png)
 
-## 🚀 About
+## About
 
-Conceptual landing page for **Haumea**, a premium **somatic renewal and circadian intelligence platform** designed to align your body's biology with the natural rhythms of creation. Developed with **Vite**, **React 19**, **TypeScript**, and **Tailwind CSS v3**. This project is the seventeenth realization of our ambitious challenge: creating **1 complete and functional mockup per day using AI**.
+Conceptual landing page for One Piece Landing, a conceptual anime pirate crew showcase that turns the Straw Hat crew, Luffy's gears, bounties, audio, and cinematic motion into an immersive fan landing page. Developed with Vite, React 19, TypeScript, Tailwind CSS 4, and Motion/React. This project is the eighteenth realization of an ambitious challenge: creating 1 complete and functional mockup per day using AI.
 
-Haumea is designed to dissolve chronic stress, restore natural circadian pathways, and nurture somatic growth through structured rituals, quiet-rest integration, and deep, non-invasive bio-marker tracking. The experience is delivered via a refined, image-led, luxury dark-themed interface built on glassmorphic compositions.
+One Piece Landing is designed as a cinematic fan experience for exploring the Straw Hat Pirates through full-screen motion, character slides, Luffy gear forms, wanted-style bounty data, looping media, and a compact interface built for fast navigation. The goal is to make the crew feel collectible, energetic, and instantly readable while keeping the whole experience in a no-scroll, app-like landing page.
 
-Live URL: [https://haumea-landing.adrielzimbril.com](https://haumea-landing.adrielzimbril.com)
+Live URL: [https://one-piece-landing.adrielzimbril.com](https://one-piece-landing.adrielzimbril.com)
 
-## 🎨 Design & Aesthetic Decisions
+## Design & Aesthetic Decisions
 
-For this project, the theme focuses on **somatic biology, organic balance, and circadian alignment**.
+For this project, the theme focuses on anime motion, pirate poster energy, and character-led storytelling.
 
-- **Luxury Organic Warmth:** A refined palette of deep obsidian ink, warm cream, burnished copper, and soft gold accents, coupled with dynamic atmospheric background video looping.
-- **Micro-interactions:** A stateful and immersive Interactive Daily Routine Builder that lets users inspect morning rise, mid-day focus, and evening wind-down habits.
-- **Glassmorphism (Liquid Glass):** Sophisticated frosted glass components blending seamlessly with the moving background elements.
-- **Premium Typography:** Clean Sans-serif modern typography designed for high-end digital wellness interfaces.
+- **Cinematic Fan Aesthetic:** Full-screen videos, character artwork, bold display typography, and high-contrast pirate poster framing create an expressive anime landing page.
+- **No-Scroll App Feel:** The home, crew, and gears views are designed around 100dvh screens so the experience behaves like a compact interactive showcase.
+- **Character Slider System:** Each Straw Hat member is presented through a full-screen slide with bounty data, role details, color accents, and two-image artwork rotation when assets are available.
+- **Gear Showcase:** Luffy's transformations use dedicated artwork, custom color palettes, and timed slide transitions for a focused power-form gallery.
+- **Purposeful Media:** Looping background video and audio controls add atmosphere while keeping the UI directly navigable.
 
-## 🧩 Key Sections
+## Key Sections
 
-- **🌟 Hero Section:** Immersive introduction with a fluid ambient background video loop, luxury branding, sticky glass navigation, and performance CTA buttons.
-- **🌿 Wellness Ecosystem:** Four-part core somatic domains covering Mind Dynamics, Physical Synergy, Structured Routine, and Tailored Growth.
-- **🔄 Daily Routine Builder:** Stateful interactive timeline dashboard showing hourly habits (Morning Rise, Mid-day Focus, and Evening Wind-down rituals).
-- **📊 Deep Insights:** Somatic analytics visualization and detailed biological marker summaries.
-- **🧬 Expert Cohort:** Co-designed by leading specialists in somatic health, circadian medicine, and neural sciences.
-- **🌐 Footer:** Brand summary, "Circadian Stream" newsletter signup, and somatic legal links.
+- **Hero Section:** Immersive video-led introduction with integrated navigation, audio control, animated copy, and direct access to the crew.
+- **Crew Slider:** Full-screen Straw Hat roster with member-specific colors, bounties, roles, devil fruit details, and character artwork.
+- **Luffy Gears:** Dedicated transformation gallery covering base form through Gear Fifth with image-led slides and gear metadata.
+- **Member Files:** Individual crew member views with profile details and bounty information.
+- **Audio Controls:** Persistent sound toggle for the looping soundtrack across the experience.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 This mockup was built with modern, high-performance web technologies:
 
-- **[Vite](https://vite.dev/)** as the ultra-fast build tool
+- **[Vite](https://vite.dev/)** as the fast build tool
 - **[React 19](https://react.dev/)**
 - **TypeScript** for scalable component architecture
-- **[Tailwind CSS v3](https://tailwindcss.com/)** for modern design tokens and utility styling
-- **[Lucide React](https://lucide.dev/)** for clean, modern iconography
+- **[Tailwind CSS v4](https://tailwindcss.com/)** for modern design tokens and utility styling
+- **[Motion/React](https://motion.dev/)** for entrance, hover, and slide animations
+- **[Lucide React](https://lucide.dev/)** for clean iconography
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Install dependencies
@@ -52,50 +53,49 @@ pnpm dev
 
 Open `http://localhost:5173` in your browser to see the result.
 
-## 🌌 Let's meet in space (or on Earth) 🚀
+## Let's meet in space (or on Earth)
 
 I'm always happy to discuss new projects, collaborations, or simply exchange creative ideas. Here's how to contact me:
 
-- **📧 Email**: [hello@adrielzimbril.com](mailto:hello@adrielzimbril.com)
-- **🌐 Website**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
-- **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
-- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbrilcode](https://www.linkedin.com/in/adrielzimbrilcode)
-- **🐼 GitHub**: [https://github.com/adrielzimbril](https://github.com/adrielzimbril)
+- **Email**: [hello@adrielzimbril.com](mailto:hello@adrielzimbril.com)
+- **Website**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
+- **Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
+- **LinkedIn**: [https://www.linkedin.com/in/adrielzimbrilcode](https://www.linkedin.com/in/adrielzimbrilcode)
+- **GitHub**: [https://github.com/adrielzimbril](https://github.com/adrielzimbril)
 
-### 🐼 Fun Facts
+### Fun Facts
 
-- 🚀 Passionate about space exploration and technology
-- 🐼 Love pandas (and animals in general!)
-- 🎨 Creative at heart, whether in design or code
-- ☕ Addicted to coffee and complex technical challenges
+- Passionate about space exploration and technology
+- Creative at heart, whether in design or code
+- Addicted to coffee and complex technical challenges
 
-## 🌟 Join the Adventure
+## Join the Adventure
 
 If you like this project, feel free to:
 
-- ⭐ Star the project
-- 🐞 Report bugs
-- ✨ Suggest improvements
-- 🚀 Share with other enthusiasts
+- Star the project
+- Report bugs
+- Suggest improvements
+- Share with other enthusiasts
 
-## 💖 Support the Project
+## Support the Project
 
 If you find this project useful and would like to support its development, you can do so through these platforms:
 
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://go.adrielzimbril.com/gs)
 
-## 🌐 Hosting
+## Hosting
 
 This project is 100% hosted on modern cloud infrastructure for maximum performance and reliability:
 
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
-## 📄 License
+## License
 
 This project is under the MIT license. Feel free to use it as a base for your own portfolio or project.
 
 ---
 
-**Developed with ❤️ by Adriel Zimbril**
+**Developed with care by Adriel Zimbril**
 _Product Designer & Fullstack Developer_
-🚀 Digital Universe Explorer | 🐼 Panda Friend | 🎨 Passionate Creator
+Digital Universe Explorer | Passionate Creator
