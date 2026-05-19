@@ -71,8 +71,8 @@ const gears: Gear[] = [
     jp: "ギア・サード",
     tagline: "Bone Balloon",
     desc: "Inflating his skeleton to giant proportions. Huge reach, devastating impact, and a cartoon-heavy punch line.",
-    accent: "#FF7A00",
-    accentDeep: "#9A3F00",
+    accent: "#E85D04",
+    accentDeep: "#7A2E00",
     Icon: Activity,
     model: "GUM-GUM // GIANT",
     unlocked: "WATER 7",
@@ -155,7 +155,7 @@ export function Gears({ setRoute }: Props) {
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(90deg, rgba(248, 248, 248, 0.96) 0%, rgba(248, 248, 248, 0.86) 28%, transparent 58%), linear-gradient(0deg, ${INK}B8 0%, transparent 36%), radial-gradient(circle at 74% 26%, ${active.accent}52 0%, transparent 32%)`,
+          background: `linear-gradient(90deg, rgba(248, 248, 248, 0.95) 0%, rgba(248, 248, 248, 0.9) 28%, transparent 58%), linear-gradient(0deg, ${INK}B8 0%, transparent 36%)`,
         }}
       />
 
