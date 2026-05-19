@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ArrowUpRight, Skull } from "lucide-react";
 import { members } from "../members";
-import brookImage from "../../imports/brook.jpeg";
-import robinImage from "../../imports/robin.jpeg";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
@@ -16,9 +14,16 @@ const C = {
   red: "#E2231A",
 };
 
-const memberImages: Record<string, string> = {
-  brook: brookImage,
-  robin: robinImage,
+const memberImages: Record<string, string[]> = {
+  brook: ["/assets/brook.jpeg", "/assets/brook-1.jpeg"],
+  chopper: ["/assets/chopper.jpeg", "/assets/chopper-1.jpeg"],
+  franky: ["/assets/franky.jpeg", "/assets/franky-1.jpeg"],
+  luffy: ["/assets/luffy.jpeg", "/assets/luffy-1.jpeg"],
+  nami: ["/assets/nami.jpeg", "/assets/nami-1.jpeg"],
+  robin: ["/assets/robin.jpeg", "/assets/robin-1.jpeg"],
+  sanji: ["/assets/sanji.jpeg", "/assets/sanji-1.jpeg"],
+  usopp: ["/assets/usopp.jpeg", "/assets/usopp-1.jpeg"],
+  zoro: ["/assets/zoro.jpeg", "/assets/zoro-1.jpeg"],
 };
 
 type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
@@ -30,8 +35,10 @@ type Props = {
 
 export function Crew({ onSelect, setRoute }: Props) {
   const [index, setIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
   const active = members[index];
-  const activeImage = memberImages[active.id];
+  const activeImages = memberImages[active.id] ?? [];
+  const activeImage = activeImages[imageIndex % activeImages.length];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -40,6 +47,20 @@ export function Crew({ onSelect, setRoute }: Props) {
 
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    setImageIndex(0);
+  }, [index]);
+
+  useEffect(() => {
+    if (activeImages.length < 2) return;
+
+    const id = setInterval(() => {
+      setImageIndex((current) => (current + 1) % activeImages.length);
+    }, 4000);
+
+    return () => clearInterval(id);
+  }, [activeImages.length, index]);
 
   return (
     <section
@@ -65,11 +86,27 @@ export function Crew({ onSelect, setRoute }: Props) {
             background: `radial-gradient(circle at 72% 28%, ${active.color}AA 0%, transparent 30%), radial-gradient(circle at 83% 72%, ${active.colorDeep}99 0%, transparent 34%), linear-gradient(135deg, ${active.color} 0%, ${active.colorDeep} 100%)`,
           }}
         >
-          {activeImage ? (
-            <img
-              src={activeImage}
-              alt=""
-              className="h-full w-full object-cover"
+          <AnimatePresence mode="sync">
+            {activeImage ? (
+              <motion.img
+                key={activeImage}
+                src={activeImage}
+                alt=""
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.75, ease: "easeInOut" }}
+                className="absolute inset-0 h-full w-full object-cover"
+                aria-hidden="true"
+              />
+            ) : null}
+          </AnimatePresence>
+          {!activeImage ? (
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `radial-gradient(circle at 72% 28%, ${active.color}AA 0%, transparent 30%), radial-gradient(circle at 83% 72%, ${active.colorDeep}99 0%, transparent 34%), linear-gradient(135deg, ${active.color} 0%, ${active.colorDeep} 100%)`,
+              }}
               aria-hidden="true"
             />
           ) : null}
@@ -79,7 +116,7 @@ export function Crew({ onSelect, setRoute }: Props) {
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(90deg, rgba(248, 248, 248, 0.96) 0%, rgba(248, 248, 248, 0.86) 30%, transparent 60%), linear-gradient(0deg, ${C.ink}B8 0%, transparent 34%)`,
+          background: `radial-gradient(ellipse at left bottom, rgba(248, 248, 248, 0.96) 0%, rgba(248, 248, 248, 0.78) 24%, transparent 54%), radial-gradient(ellipse at left top, rgba(248, 248, 248, 0.46) 0%, rgba(248, 248, 248, 0.22) 24%, transparent 52%), linear-gradient(30deg, ${C.ink}A8 0%, ${C.ink}55 24%, transparent 48%)`,
         }}
       />
 

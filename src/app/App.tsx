@@ -15,9 +15,6 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import heroVideo from "../imports/video.mp4";
-import heroVideo2 from "../imports/video-1.mp4";
-import audioTrack from "../imports/audio.mp3";
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
@@ -40,6 +37,10 @@ const C = {
   redDeep: "#9A1410",
   bone: "#F2F2F2",
 };
+
+const heroVideo = "/assets/video.mp4";
+const heroVideo2 = "/assets/video-1.mp4";
+const audioTrack = "/assets/audio.mp3";
 
 const crew = [
   { name: "Straw Hats", jp: "麦わら", Icon: Skull },

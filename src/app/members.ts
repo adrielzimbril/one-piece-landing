@@ -129,8 +129,8 @@ export const members: Member[] = [
     bounty: "383,000,000",
     quote: "Yohohoho!",
     bio: "A skeleton with a song and a sword. Promised a whale he'd come back — and he did, fifty years late.",
-    color: "#141414",
-    colorDeep: "#8A2F0A",
+    color: "#F97316",
+    colorDeep: "#9A3412",
   },
   {
     id: "jinbe",

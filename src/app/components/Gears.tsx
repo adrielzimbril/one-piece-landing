@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Activity, Flame, Sun, Wind, Zap } from "lucide-react";
-import gear1 from "../../imports/gear-1.jpeg";
-import gear2 from "../../imports/gear-2.jpeg";
-import gear3 from "../../imports/gear-3.jpeg";
-import gear4 from "../../imports/gear-4.jpeg";
-import gear5 from "../../imports/gear5.jpeg";
 
 const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
@@ -14,6 +9,12 @@ const mono = { fontFamily: '"JetBrains Mono", monospace' };
 const BONE = "#F2F2F2";
 const CREAM = "#F8F8F8";
 const INK = "#0B0B0B";
+
+const gear1 = "/assets/gear-1.jpeg";
+const gear2 = "/assets/gear-2.jpeg";
+const gear3 = "/assets/gear-3.jpeg";
+const gear4 = "/assets/gear-4.jpeg";
+const gear5 = "/assets/gear5.jpeg";
 
 type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
 
