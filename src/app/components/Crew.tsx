@@ -24,7 +24,7 @@ const memberImages: Record<string, string[]> = {
   sanji: ["/assets/sanji.jpeg", "/assets/sanji-1.jpeg"],
   usopp: ["/assets/usopp.jpeg", "/assets/usopp-1.jpeg"],
   zoro: ["/assets/zoro.jpeg", "/assets/zoro-1.jpeg"],
-  jinbe: ["/assets/jimbe.jpeg", "/assets/jimbe-1.jpeg"],
+  jinbe: ["/assets/jinbe.jpeg", "/assets/jinbe-1.jpeg"],
 };
 
 type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
