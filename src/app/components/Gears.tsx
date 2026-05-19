@@ -155,7 +155,7 @@ export function Gears({ setRoute }: Props) {
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(90deg, ${CREAM}F2 0%, ${CREAM}CC 29%, ${CREAM}55 58%, transparent 100%), linear-gradient(0deg, ${INK}B8 0%, transparent 36%), radial-gradient(circle at 68% 30%, ${active.accent}66 0%, transparent 42%)`,
+          background: `linear-gradient(90deg, ${CREAM}F2 0%, ${CREAM}E8 28%, transparent 58%), linear-gradient(0deg, ${INK}B8 0%, transparent 36%), radial-gradient(circle at 68% 30%, ${active.accent}66 0%, transparent 42%)`,
         }}
       />
 
