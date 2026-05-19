@@ -13,8 +13,7 @@ import {
   Swords,
   Users,
 } from "lucide-react";
-import slide1 from "../imports/image.png";
-import slide2 from "../imports/image-1.png";
+import heroVideo from "../imports/video.mp4";
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
@@ -49,7 +48,6 @@ const crew = [
 
 const slides = [
   {
-    image: slide1,
     issue: "001",
     kicker: "EAST BLUE // CHAPTER ONE",
     heading: ["SAIL THE", "GRAND", "LINE"],
@@ -61,7 +59,6 @@ const slides = [
     bounty: "3,000,000,000",
   },
   {
-    image: slide2,
     issue: "002",
     kicker: "NEW WORLD // CHAPTER TWO",
     heading: ["BECOME", "THE PIRATE", "KING"],
@@ -172,7 +169,7 @@ export default function App() {
 
     const id = setInterval(
       () => setIndex((i) => (i + 1) % slides.length),
-      6500,
+      8000,
     );
     return () => clearInterval(id);
   }, [route.name]);
@@ -217,22 +214,17 @@ export default function App() {
         color: C.ink,
       }}
     >
-      <AnimatePresence mode="sync">
-        <motion.img
-          key={index}
-          src={slide.image}
-          alt=""
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.02 }}
-          transition={{
-            opacity: { duration: 1.4, ease: "easeInOut" },
-            scale: { duration: 8, ease: "easeOut" },
-          }}
-          className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
-          style={{ zIndex: 0 }}
-        />
-      </AnimatePresence>
+      <video
+        src={heroVideo}
+        className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
+        style={{ zIndex: 0 }}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
 
       {/* Vertical side label */}
       <div
