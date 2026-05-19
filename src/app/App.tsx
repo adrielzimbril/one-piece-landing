@@ -18,6 +18,7 @@ import {
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
+import audioTrack from "../imports/audio.mp3";
 import { landingConfig } from "./landingConfig";
 import { members, findMember } from "./members";
 import { onePieceTheme } from "./onePieceTheme";
@@ -34,7 +35,6 @@ const mono = { fontFamily: '"JetBrains Mono", monospace' };
 
 const C = onePieceTheme;
 
-const audioTrack = landingConfig.audio.track;
 const heroBackgrounds =
   landingConfig.hero.backgroundMode === "video"
     ? landingConfig.hero.videos
@@ -227,6 +227,7 @@ export default function App() {
   const [index, setIndex] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const soundEnabledRef = useRef(true);
 
   useEffect(() => {
     if (route.name !== "home") return;
@@ -239,17 +240,40 @@ export default function App() {
   }, [route.name]);
 
   useEffect(() => {
+    soundEnabledRef.current = soundEnabled;
+  }, [soundEnabled]);
+
+  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     audio.volume = 0.45;
+    audio.muted = false;
+    audio.load();
+
+    const playAudio = () => {
+      if (!soundEnabledRef.current) return;
+
+      audio.muted = false;
+      audio.volume = 0.45;
+      audio.play().catch(() => undefined);
+    };
+
     const play = audio.play();
 
     if (play !== undefined) {
-      play.catch(() => {
-        setSoundEnabled(false);
-      });
+      play.catch(() => undefined);
     }
+
+    window.addEventListener("pointerdown", playAudio, { once: true });
+    window.addEventListener("keydown", playAudio, { once: true });
+    window.addEventListener("touchstart", playAudio, { once: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", playAudio);
+      window.removeEventListener("keydown", playAudio);
+      window.removeEventListener("touchstart", playAudio);
+    };
   }, []);
 
   const toggleSound = () => {
@@ -258,10 +282,12 @@ export default function App() {
 
     if (soundEnabled) {
       audio.pause();
+      audio.muted = true;
       setSoundEnabled(false);
       return;
     }
 
+    audio.muted = false;
     audio.volume = 0.45;
     audio
       .play()
@@ -271,7 +297,14 @@ export default function App() {
 
   const audioControls = (
     <>
-      <audio ref={audioRef} src={audioTrack} loop autoPlay preload="auto" />
+      <audio
+        ref={audioRef}
+        src={audioTrack}
+        loop
+        autoPlay
+        muted={false}
+        preload="auto"
+      />
       <motion.button
         type="button"
         onClick={toggleSound}
