@@ -256,12 +256,7 @@ export default function App() {
     );
   }
   if (route.name === "gears") {
-    return withAudio(
-      <div>
-        <NavStrip route={route} setRoute={setRoute} />
-        <Gears />
-      </div>
-    );
+    return withAudio(<Gears setRoute={setRoute} />);
   }
   if (route.name === "member") {
     const m = findMember(route.id);

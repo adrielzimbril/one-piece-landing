@@ -15,6 +15,8 @@ const BONE = "#F2F2F2";
 const CREAM = "#F8F8F8";
 const INK = "#0B0B0B";
 
+type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
+
 type Gear = {
   id: string;
   num: string;
@@ -109,7 +111,11 @@ const gears: Gear[] = [
   },
 ];
 
-export function Gears() {
+type Props = {
+  setRoute: (route: RouteTarget) => void;
+};
+
+export function Gears({ setRoute }: Props) {
   const [index, setIndex] = useState(4);
   const active = gears[index];
 
@@ -123,7 +129,7 @@ export function Gears() {
 
   return (
     <section
-      className="relative h-[calc(100vh-74px)] min-h-[680px] overflow-hidden"
+      className="relative h-[100dvh] overflow-hidden"
       style={{
         backgroundColor: CREAM,
         color: INK,
@@ -167,10 +173,62 @@ export function Gears() {
         GEAR {active.num} // {active.status}
       </div>
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-6 lg:px-12 lg:py-8">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
+      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-4 lg:px-12 lg:py-5">
+        <div className="flex flex-col gap-4 lg:gap-5">
+          <nav className="flex items-center justify-between gap-4">
+            <button
+              type="button"
+              onClick={() => setRoute({ name: "home" })}
+              className="flex items-center gap-2 px-3 py-1.5"
+              style={{ backgroundColor: INK }}
+              aria-label="Go home"
+            >
+              <span
+                className="text-3xl leading-none lg:text-4xl"
+                style={{ ...display, color: active.accent }}
+              >
+                ONE
+              </span>
+              <span
+                className="text-3xl leading-none lg:text-4xl"
+                style={{ ...display, color: BONE }}
+              >
+                PIECE
+              </span>
+              <span className="ml-1 hidden text-xs sm:inline" style={{ ...jp, color: BONE }}>
+                海賊
+              </span>
+            </button>
+
+            <div
+              className="hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex"
+              style={{ backgroundColor: INK, border: `2px solid ${INK}` }}
+            >
+              {[
+                { label: "Home", active: false, go: () => setRoute({ name: "home" }) },
+                { label: "Crew", active: false, go: () => setRoute({ name: "crew" }) },
+                { label: "Gears", active: true, go: () => setRoute({ name: "gears" }) },
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={item.go}
+                  className="rounded-full px-3 py-1.5 text-sm transition lg:px-4 lg:text-base"
+                  style={{
+                    color: item.active ? INK : BONE,
+                    backgroundColor: item.active ? BONE : "transparent",
+                    fontWeight: item.active ? 600 : 400,
+                  }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </nav>
+
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="mb-2 flex flex-wrap items-center gap-2">
               <span
                 className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
                 style={{ ...mono, backgroundColor: INK, color: BONE }}
@@ -182,7 +240,7 @@ export function Gears() {
               </span>
             </div>
             <h1
-              className="text-6xl uppercase leading-[0.82] sm:text-7xl lg:text-8xl xl:text-[10rem]"
+              className="text-5xl uppercase leading-[0.82] sm:text-6xl lg:text-8xl xl:text-[8.75rem]"
               style={{ ...display, color: INK }}
             >
               Luffy
@@ -197,7 +255,7 @@ export function Gears() {
               Gears
             </h1>
           </div>
-          <div className="hidden text-right sm:block">
+            <div className="hidden text-right sm:block">
             <div className="text-[10px] tracking-[0.25em]" style={mono}>
               BOUNTY
             </div>
@@ -211,10 +269,11 @@ export function Gears() {
             >
               ฿ 3,000,000,000
             </div>
+            </div>
           </div>
         </div>
 
-        <div className="grid items-end gap-6 lg:grid-cols-12 lg:gap-10">
+        <div className="grid items-end gap-4 lg:grid-cols-12 lg:gap-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={`copy-${active.id}`}
@@ -224,9 +283,9 @@ export function Gears() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-7"
             >
-              <div className="mb-2 flex items-center gap-3">
+              <div className="mb-1 flex items-center gap-3">
                 <span
-                  className="text-7xl leading-none lg:text-8xl"
+                  className="text-6xl leading-none lg:text-8xl"
                   style={{
                     ...display,
                     color: active.accent,
@@ -240,7 +299,7 @@ export function Gears() {
                     // FORM
                   </div>
                   <div
-                    className="text-3xl uppercase leading-none lg:text-5xl"
+                    className="text-3xl uppercase leading-none lg:text-4xl"
                     style={{ ...display, color: INK }}
                   >
                     {active.tagline}
@@ -248,13 +307,13 @@ export function Gears() {
                 </div>
               </div>
               <h2
-                className="mb-2 text-5xl uppercase leading-[0.9] lg:text-7xl"
+                className="mb-1 text-4xl uppercase leading-[0.9] lg:text-6xl"
                 style={display}
               >
                 {active.name}
               </h2>
               <div
-                className="mb-4 text-2xl lg:text-4xl"
+                className="mb-3 text-2xl lg:text-3xl"
                 style={{
                   ...jp,
                   color: active.accentDeep,
@@ -263,7 +322,7 @@ export function Gears() {
               >
                 {active.jp}
               </div>
-              <p className="max-w-xl text-base leading-relaxed lg:text-lg">
+              <p className="max-w-xl text-sm leading-relaxed lg:text-base">
                 {active.desc}
               </p>
             </motion.div>
