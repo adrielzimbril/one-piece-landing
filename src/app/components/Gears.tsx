@@ -14,7 +14,6 @@ const mono = { fontFamily: '"JetBrains Mono", monospace' };
 const BONE = "#F2F2F2";
 const CREAM = "#F8F8F8";
 const INK = "#0B0B0B";
-const GOLD = "#C7A44A";
 
 type RouteTarget = { name: "home" } | { name: "crew" } | { name: "gears" };
 
@@ -42,8 +41,8 @@ const gears: Gear[] = [
     jp: "ゴム人間",
     tagline: "Rubber Body",
     desc: "The original Gum-Gum fighting style. Elastic strikes, reckless momentum, and the grin that starts every impossible fight.",
-    accent: "#A88435",
-    accentDeep: "#3D3527",
+    accent: "#0F7C8A",
+    accentDeep: "#073E45",
     Icon: Zap,
     model: "GUM-GUM // ORIGIN",
     unlocked: "EAST BLUE",
@@ -57,8 +56,8 @@ const gears: Gear[] = [
     jp: "ギア・セカンド",
     tagline: "Steam Engine",
     desc: "Pumping blood at engine speed. Luffy moves faster than the eye can follow, trading stamina for blinding velocity.",
-    accent: "#B23A2F",
-    accentDeep: "#4A211E",
+    accent: "#D01818",
+    accentDeep: "#6F0909",
     Icon: Wind,
     model: "GUM-GUM // ACCEL",
     unlocked: "ENIES LOBBY",
@@ -72,8 +71,8 @@ const gears: Gear[] = [
     jp: "ギア・サード",
     tagline: "Bone Balloon",
     desc: "Inflating his skeleton to giant proportions. Huge reach, devastating impact, and a cartoon-heavy punch line.",
-    accent: "#9A6E2F",
-    accentDeep: "#3A2C1C",
+    accent: "#C17800",
+    accentDeep: "#684000",
     Icon: Activity,
     model: "GUM-GUM // GIANT",
     unlocked: "WATER 7",
@@ -87,8 +86,8 @@ const gears: Gear[] = [
     jp: "ギア・フォース",
     tagline: "Boundman / Snakeman",
     desc: "Haki-infused rubber compression. Bounce, recoil, and a fluid fighting form built to break the New World.",
-    accent: "#5B4B7A",
-    accentDeep: "#282235",
+    accent: "#5A25D6",
+    accentDeep: "#2E126F",
     Icon: Flame,
     model: "GUM-GUM // HAKI",
     unlocked: "DRESSROSA",
@@ -102,8 +101,8 @@ const gears: Gear[] = [
     jp: "ニカ",
     tagline: "Sun God Nika",
     desc: "The awakening of the Hito Hito no Mi, Model: Nika. Freedom made flesh, cartoon physics, infinite imagination.",
-    accent: "#C8B98A",
-    accentDeep: "#51472F",
+    accent: "#F2C230",
+    accentDeep: "#8A6500",
     Icon: Sun,
     model: "HITO HITO // NIKA",
     unlocked: "EGGHEAD",
@@ -156,7 +155,7 @@ export function Gears({ setRoute }: Props) {
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(90deg, rgba(248, 248, 248, 0.95) 0%, rgba(248, 248, 248, 0.9) 28%, transparent 58%), linear-gradient(0deg, ${INK}B8 0%, transparent 36%)`,
+          background: `linear-gradient(90deg, rgba(248, 248, 248, 0.96) 0%, rgba(248, 248, 248, 0.86) 28%, transparent 58%), linear-gradient(0deg, ${INK}B8 0%, transparent 36%), radial-gradient(circle at 74% 26%, ${active.accent}52 0%, transparent 32%)`,
         }}
       />
 
@@ -186,7 +185,7 @@ export function Gears({ setRoute }: Props) {
             >
               <span
                 className="text-3xl leading-none lg:text-4xl"
-                style={{ ...display, color: GOLD }}
+                style={{ ...display, color: active.accent }}
               >
                 ONE
               </span>
@@ -247,7 +246,7 @@ export function Gears({ setRoute }: Props) {
               Luffy
               <span
                 style={{
-                  color: GOLD,
+                  color: active.accent,
                   textShadow: `4px 4px 0 ${INK}`,
                 }}
               >
@@ -264,7 +263,7 @@ export function Gears({ setRoute }: Props) {
               className="text-4xl lg:text-5xl"
               style={{
                 ...display,
-                color: GOLD,
+                color: active.accent,
                 textShadow: `2px 2px 0 ${INK}`,
               }}
             >
@@ -289,7 +288,7 @@ export function Gears({ setRoute }: Props) {
                   className="text-6xl leading-none lg:text-8xl"
                   style={{
                     ...display,
-                    color: GOLD,
+                    color: active.accent,
                     textShadow: `4px 4px 0 ${INK}`,
                   }}
                 >
@@ -395,11 +394,11 @@ export function Gears({ setRoute }: Props) {
                   whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-2 rounded-full px-3 py-2 lg:px-4"
                   style={{
-                    backgroundColor: isActive ? INK : BONE,
+                    backgroundColor: isActive ? gear.accent : BONE,
                     color: isActive ? BONE : INK,
                     border: `2px solid ${INK}`,
                     boxShadow: isActive
-                      ? `4px 4px 0 ${gear.accent}`
+                      ? `4px 4px 0 ${INK}`
                       : `2px 2px 0 ${INK}`,
                   }}
                   aria-label={`Show ${gear.name}`}
@@ -428,7 +427,7 @@ export function Gears({ setRoute }: Props) {
                   transition={{ type: "spring", stiffness: 260, damping: 24 }}
                   className="h-2"
                   style={{
-                    backgroundColor: gearIndex === index ? GOLD : INK,
+                    backgroundColor: gearIndex === index ? active.accent : INK,
                     opacity: gearIndex === index ? 1 : 0.45,
                   }}
                   aria-label={`Slide ${gearIndex + 1}`}
