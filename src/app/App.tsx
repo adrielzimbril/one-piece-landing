@@ -2,16 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight,
-  Facebook,
-  Instagram,
-  Youtube,
+  Camera,
   Anchor,
   Skull,
   Compass,
   Ship,
   Crown,
+  Share2,
   Swords,
   Users,
+  Video,
   Volume2,
   VolumeX,
 } from "lucide-react";
@@ -592,7 +592,7 @@ export default function App() {
                 and the courage to chase impossible dreams.
               </p>
               <div className="flex items-center gap-2">
-                {[Facebook, Instagram, Youtube].map((Icon, i) => (
+                {[Share2, Camera, Video].map((Icon, i) => (
                   <motion.a
                     key={i}
                     href="#"
