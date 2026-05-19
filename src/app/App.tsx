@@ -567,8 +567,34 @@ export default function App() {
         </div>
 
         {/* BOTTOM: CTA + crew preview */}
+
+        <motion.button
+          whileHover={{ scale: 1.04, x: 4 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => setRoute({ name: "crew" })}
+          className="inline-flex w-fit mx-auto items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full"
+          style={{
+            backgroundColor: C.red,
+            color: C.bone,
+            border: `2px solid ${C.ink}`,
+          }}
+        >
+          <Users className="w-4 h-4" />
+          <span
+            className="text-sm lg:text-base tracking-[0.2em]"
+            style={display}
+          >
+            SEE THE CREW
+          </span>
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: C.ink }}
+          >
+            <ArrowRight className="w-4 h-4" style={{ color: C.bone }} />
+          </span>
+        </motion.button>
         <div
-          className="flex items-center justify-between gap-4 px-4 py-3 rounded-full flex-wrap"
+          className="flex hidden items-center justify-between gap-4 px-4 py-3 rounded-full flex-wrap"
           style={{
             backgroundColor: C.bone,
             border: `2px solid ${C.ink}`,
@@ -582,7 +608,7 @@ export default function App() {
             >
               ROSTER // 10
             </span>
-            <div className="flex items-center -space-x-2">
+            <div className="flex items-center -space-x-2 hidden">
               {members.slice(0, 6).map((m) => (
                 <button
                   key={m.id}
