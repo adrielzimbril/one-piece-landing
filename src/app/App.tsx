@@ -228,6 +228,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
   const soundEnabledRef = useRef(true);
+  const audioRetryRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (route.name !== "home") return;
@@ -251,28 +252,59 @@ export default function App() {
     audio.muted = false;
     audio.load();
 
-    const playAudio = () => {
-      if (!soundEnabledRef.current) return;
+    const stopRetrying = () => {
+      if (audioRetryRef.current === null) return;
 
-      audio.muted = false;
-      audio.volume = 0.45;
-      audio.play().catch(() => undefined);
+      window.clearInterval(audioRetryRef.current);
+      audioRetryRef.current = null;
     };
 
-    const play = audio.play();
+    const playAudio = async () => {
+      if (!soundEnabledRef.current) {
+        stopRetrying();
+        return;
+      }
 
-    if (play !== undefined) {
-      play.catch(() => undefined);
-    }
+      if (!audio.paused && audio.readyState > 2) {
+        stopRetrying();
+        return;
+      }
+
+      audio.load();
+      audio.muted = false;
+      audio.volume = 0.45;
+
+      try {
+        await audio.play();
+        stopRetrying();
+      } catch {
+        if (audioRetryRef.current === null && soundEnabledRef.current) {
+          audioRetryRef.current = window.setInterval(() => {
+            void playAudio();
+          }, 700);
+        }
+      }
+    };
+
+    void playAudio();
 
     window.addEventListener("pointerdown", playAudio, { once: true });
     window.addEventListener("keydown", playAudio, { once: true });
     window.addEventListener("touchstart", playAudio, { once: true });
+    document.addEventListener("visibilitychange", playAudio);
+    audio.addEventListener("canplay", playAudio);
+    audio.addEventListener("canplaythrough", playAudio);
+    audio.addEventListener("playing", stopRetrying);
 
     return () => {
+      stopRetrying();
       window.removeEventListener("pointerdown", playAudio);
       window.removeEventListener("keydown", playAudio);
       window.removeEventListener("touchstart", playAudio);
+      document.removeEventListener("visibilitychange", playAudio);
+      audio.removeEventListener("canplay", playAudio);
+      audio.removeEventListener("canplaythrough", playAudio);
+      audio.removeEventListener("playing", stopRetrying);
     };
   }, []);
 
@@ -283,6 +315,10 @@ export default function App() {
     if (soundEnabled) {
       audio.pause();
       audio.muted = true;
+      if (audioRetryRef.current !== null) {
+        window.clearInterval(audioRetryRef.current);
+        audioRetryRef.current = null;
+      }
       setSoundEnabled(false);
       return;
     }
