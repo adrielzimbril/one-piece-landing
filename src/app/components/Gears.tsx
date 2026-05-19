@@ -41,8 +41,8 @@ const gears: Gear[] = [
     jp: "ゴム人間",
     tagline: "Rubber Body",
     desc: "The original Gum-Gum fighting style. Elastic strikes, reckless momentum, and the grin that starts every impossible fight.",
-    accent: "#0F7C8A",
-    accentDeep: "#073E45",
+    accent: "#006DFF",
+    accentDeep: "#003B8A",
     Icon: Zap,
     model: "GUM-GUM // ORIGIN",
     unlocked: "EAST BLUE",
@@ -71,8 +71,8 @@ const gears: Gear[] = [
     jp: "ギア・サード",
     tagline: "Bone Balloon",
     desc: "Inflating his skeleton to giant proportions. Huge reach, devastating impact, and a cartoon-heavy punch line.",
-    accent: "#C17800",
-    accentDeep: "#684000",
+    accent: "#FF7A00",
+    accentDeep: "#9A3F00",
     Icon: Activity,
     model: "GUM-GUM // GIANT",
     unlocked: "WATER 7",
@@ -101,8 +101,8 @@ const gears: Gear[] = [
     jp: "ニカ",
     tagline: "Sun God Nika",
     desc: "The awakening of the Hito Hito no Mi, Model: Nika. Freedom made flesh, cartoon physics, infinite imagination.",
-    accent: "#F2C230",
-    accentDeep: "#8A6500",
+    accent: "#D4AF37",
+    accentDeep: "#7A5A00",
     Icon: Sun,
     model: "HITO HITO // NIKA",
     unlocked: "EGGHEAD",
@@ -195,7 +195,10 @@ export function Gears({ setRoute }: Props) {
               >
                 PIECE
               </span>
-              <span className="ml-1 hidden text-xs sm:inline" style={{ ...jp, color: BONE }}>
+              <span
+                className="ml-1 hidden text-xs sm:inline"
+                style={{ ...jp, color: BONE }}
+              >
                 海賊
               </span>
             </button>
@@ -205,9 +208,21 @@ export function Gears({ setRoute }: Props) {
               style={{ backgroundColor: INK, border: `2px solid ${INK}` }}
             >
               {[
-                { label: "Home", active: false, go: () => setRoute({ name: "home" }) },
-                { label: "Crew", active: false, go: () => setRoute({ name: "crew" }) },
-                { label: "Gears", active: true, go: () => setRoute({ name: "gears" }) },
+                {
+                  label: "Home",
+                  active: false,
+                  go: () => setRoute({ name: "home" }),
+                },
+                {
+                  label: "Crew",
+                  active: false,
+                  go: () => setRoute({ name: "crew" }),
+                },
+                {
+                  label: "Gears",
+                  active: true,
+                  go: () => setRoute({ name: "gears" }),
+                },
               ].map((item) => (
                 <button
                   key={item.label}
@@ -229,46 +244,46 @@ export function Gears({ setRoute }: Props) {
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="mb-2 flex flex-wrap items-center gap-2">
-              <span
-                className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
-                style={{ ...mono, backgroundColor: INK, color: BONE }}
+                <span
+                  className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
+                  style={{ ...mono, backgroundColor: INK, color: BONE }}
+                >
+                  ARSENAL // 05
+                </span>
+                <span className="text-[11px] tracking-[0.2em]" style={mono}>
+                  LUFFY // GEAR TRANSFORMATIONS
+                </span>
+              </div>
+              <h1
+                className="text-5xl uppercase leading-[0.82] sm:text-6xl lg:text-8xl xl:text-[8.75rem]"
+                style={{ ...display, color: INK }}
               >
-                ARSENAL // 05
-              </span>
-              <span className="text-[11px] tracking-[0.2em]" style={mono}>
-                LUFFY // GEAR TRANSFORMATIONS
-              </span>
+                Luffy
+                <span
+                  style={{
+                    color: active.accent,
+                    textShadow: `4px 4px 0 ${INK}`,
+                  }}
+                >
+                  's
+                </span>{" "}
+                Gears
+              </h1>
             </div>
-            <h1
-              className="text-5xl uppercase leading-[0.82] sm:text-6xl lg:text-8xl xl:text-[8.75rem]"
-              style={{ ...display, color: INK }}
-            >
-              Luffy
-              <span
+            <div className="hidden text-right sm:block">
+              <div className="text-[10px] tracking-[0.25em]" style={mono}>
+                BOUNTY
+              </div>
+              <div
+                className="text-4xl lg:text-5xl"
                 style={{
+                  ...display,
                   color: active.accent,
-                  textShadow: `4px 4px 0 ${INK}`,
+                  textShadow: `2px 2px 0 ${INK}`,
                 }}
               >
-                's
-              </span>{" "}
-              Gears
-            </h1>
-          </div>
-            <div className="hidden text-right sm:block">
-            <div className="text-[10px] tracking-[0.25em]" style={mono}>
-              BOUNTY
-            </div>
-            <div
-              className="text-4xl lg:text-5xl"
-              style={{
-                ...display,
-                color: active.accent,
-                textShadow: `2px 2px 0 ${INK}`,
-              }}
-            >
-              ฿ 3,000,000,000
-            </div>
+                ฿ 3,000,000,000
+              </div>
             </div>
           </div>
         </div>
