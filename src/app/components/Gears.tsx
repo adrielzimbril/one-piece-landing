@@ -7,8 +7,15 @@ const display = { fontFamily: "Anton, sans-serif" };
 const jp = { fontFamily: '"Noto Sans JP", sans-serif' };
 const mono = { fontFamily: '"JetBrains Mono", monospace' };
 
-const { bone: BONE, cream: CREAM, ink: INK, blue, blueDeep, gold, seaFoam } =
-  onePieceTheme;
+const {
+  bone: BONE,
+  cream: CREAM,
+  ink: INK,
+  blue,
+  blueDeep,
+  gold,
+  seaFoam,
+} = onePieceTheme;
 
 const gear1 = "/assets/gear-1.jpeg";
 const gear2 = "/assets/gear-2.jpeg";
@@ -197,7 +204,7 @@ export function Gears({ setRoute }: Props) {
               </span>
               <span
                 className="text-3xl leading-none lg:text-4xl"
-                style={{ ...display, color: blue }}
+                style={{ ...display, color: INK }}
               >
                 PIECE
               </span>
@@ -211,7 +218,7 @@ export function Gears({ setRoute }: Props) {
 
             <div
               className="hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex"
-              style={{ backgroundColor: blueDeep, border: `2px solid ${INK}` }}
+              style={{ backgroundColor: INK, border: `2px solid ${INK}` }}
             >
               {[
                 {

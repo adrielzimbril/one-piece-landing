@@ -154,7 +154,7 @@ export function Crew({ onSelect, setRoute }: Props) {
               </span>
               <span
                 className="text-3xl leading-none lg:text-4xl"
-                style={{ ...display, color: C.blue }}
+                style={{ ...display, color: C.ink }}
               >
                 PIECE
               </span>
@@ -168,7 +168,7 @@ export function Crew({ onSelect, setRoute }: Props) {
 
             <div
               className="hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex"
-              style={{ backgroundColor: C.blueDeep, border: `2px solid ${C.ink}` }}
+              style={{ backgroundColor: C.ink, border: `2px solid ${C.ink}` }}
             >
               {[
                 {
@@ -209,7 +209,11 @@ export function Crew({ onSelect, setRoute }: Props) {
               <div className="mb-2 flex flex-wrap items-center gap-2">
                 <span
                   className="px-2 py-0.5 text-[10px] tracking-[0.2em]"
-                  style={{ ...mono, backgroundColor: C.blueDeep, color: C.bone }}
+                  style={{
+                    ...mono,
+                    backgroundColor: C.blueDeep,
+                    color: C.bone,
+                  }}
                 >
                   ROSTER // 10
                 </span>

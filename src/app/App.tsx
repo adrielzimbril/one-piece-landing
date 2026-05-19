@@ -169,9 +169,9 @@ function Tag({
       className="inline-block px-2 py-0.5 text-[10px] tracking-[0.15em]"
       style={{
         ...mono,
-        backgroundColor: dark ? C.blueDeep : C.red,
+        backgroundColor: dark ? C.blue : C.red,
         color: dark ? C.bone : C.bone,
-        border: `1px solid ${dark ? C.gold : C.ink}`,
+        border: `1px solid ${dark ? C.blue : C.ink}`,
       }}
     >
       {children}
@@ -271,7 +271,7 @@ export default function App() {
 
   const audioControls = (
     <>
-      <audio ref={audioRef} src={audioTrack} loop preload="auto" />
+      <audio ref={audioRef} src={audioTrack} loop autoPlay preload="auto" />
       <motion.button
         type="button"
         onClick={toggleSound}
@@ -552,7 +552,7 @@ export default function App() {
                 </span>
                 <span
                   className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: C.red }}
+                  style={{ backgroundColor: slide.accent }}
                 >
                   <ArrowRight className="w-5 h-5" style={{ color: C.bone }} />
                 </span>
@@ -655,9 +655,9 @@ export default function App() {
                     whileTap={{ scale: 0.95 }}
                     className="w-9 h-9 rounded-full flex items-center justify-center"
                     style={{
-                      backgroundColor: C.ink,
+                      backgroundColor: slide.accent,
                       color: C.bone,
-                      border: `2px solid ${i === 0 ? C.blue : i === 1 ? C.red : C.gold}`,
+                      border: `2px solid ${C.ink}`,
                     }}
                   >
                     <Icon className="w-4 h-4" />
@@ -699,7 +699,7 @@ export default function App() {
           onClick={() => setRoute({ name: "crew" })}
           className="inline-flex w-fit mx-auto items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full"
           style={{
-            backgroundColor: C.red,
+            backgroundColor: slide.accent,
             color: C.bone,
             border: `2px solid ${C.ink}`,
             boxShadow: `4px 4px 0 ${C.gold}`,
@@ -714,7 +714,7 @@ export default function App() {
           </span>
           <span
             className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: C.blueDeep }}
+            style={{ backgroundColor: C.ink }}
           >
             <ArrowRight className="w-4 h-4" style={{ color: C.bone }} />
           </span>
