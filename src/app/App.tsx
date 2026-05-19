@@ -18,6 +18,7 @@ import {
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
+import { landingConfig } from "./landingConfig";
 import { members, findMember } from "./members";
 
 type Route =
@@ -38,9 +39,11 @@ const C = {
   bone: "#F2F2F2",
 };
 
-const heroVideo = "/assets/video.mp4";
-const heroVideo2 = "/assets/video-1.mp4";
-const audioTrack = "/assets/audio.mp3";
+const audioTrack = landingConfig.audio.track;
+const heroBackgrounds =
+  landingConfig.hero.backgroundMode === "video"
+    ? landingConfig.hero.videos
+    : landingConfig.hero.images;
 
 const crew = [
   { name: "Straw Hats", jp: "麦わら", Icon: Skull },
@@ -53,7 +56,7 @@ const crew = [
 
 const slides = [
   {
-    video: heroVideo,
+    background: heroBackgrounds[0],
     issue: "001",
     kicker: "EAST BLUE // CHAPTER ONE",
     heading: ["SAIL THE", "GRAND", "LINE"],
@@ -65,7 +68,7 @@ const slides = [
     bounty: "3,000,000,000",
   },
   {
-    video: heroVideo2,
+    background: heroBackgrounds[1],
     issue: "002",
     kicker: "NEW WORLD // CHAPTER TWO",
     heading: ["BECOME", "THE PIRATE", "KING"],
@@ -164,6 +167,49 @@ function Tag({
     >
       {children}
     </span>
+  );
+}
+
+function HeroBackground({ src }: { src: string }) {
+  const isVideo = landingConfig.hero.backgroundMode === "video";
+
+  if (isVideo) {
+    return (
+      <motion.video
+        key={src}
+        src={src}
+        className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
+        style={{ zIndex: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+    );
+  }
+
+  return (
+    <motion.img
+      key={src}
+      src={src}
+      className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
+      style={{ zIndex: 0 }}
+      initial={{ opacity: 0, scale: 1.03 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        opacity: { duration: 0.8, ease: "easeInOut" },
+        scale: { duration: 8, ease: "easeOut" },
+      }}
+      alt=""
+      aria-hidden="true"
+    />
   );
 }
 
@@ -286,22 +332,7 @@ export default function App() {
       }}
     >
       <AnimatePresence mode="sync">
-        <motion.video
-          key={slide.video}
-          src={slide.video}
-          className="fixed top-0 left-0 w-full h-full object-cover pointer-events-none"
-          style={{ zIndex: 0 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
+        <HeroBackground src={slide.background} />
       </AnimatePresence>
 
       {/* Vertical side label */}
