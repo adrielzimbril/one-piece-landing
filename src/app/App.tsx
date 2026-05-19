@@ -73,7 +73,7 @@ const slides = [
     stat: "25+",
     statLabel: "YEARS AT FULL SAIL",
     statJp: "二十五年航海",
-    bounty: "1,500,000,000",
+    bounty: "3,000,000,000",
   },
 ];
 
