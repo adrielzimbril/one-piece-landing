@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight,
@@ -12,9 +12,12 @@ import {
   Crown,
   Swords,
   Users,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import heroVideo from "../imports/video.mp4";
 import heroVideo2 from "../imports/video-1.mp4";
+import audioTrack from "../imports/audio.mp3";
 import { Crew } from "./components/Crew";
 import { MemberPage } from "./components/MemberPage";
 import { Gears } from "./components/Gears";
@@ -166,6 +169,8 @@ function Tag({
 export default function App() {
   const [route, setRoute] = useState<Route>({ name: "home" });
   const [index, setIndex] = useState(0);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (route.name !== "home") return;
@@ -177,8 +182,73 @@ export default function App() {
     return () => clearInterval(id);
   }, [route.name]);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.45;
+    const play = audio.play();
+
+    if (play !== undefined) {
+      play.catch(() => {
+        setSoundEnabled(false);
+      });
+    }
+  }, []);
+
+  const toggleSound = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (soundEnabled) {
+      audio.pause();
+      setSoundEnabled(false);
+      return;
+    }
+
+    audio.volume = 0.45;
+    audio
+      .play()
+      .then(() => setSoundEnabled(true))
+      .catch(() => setSoundEnabled(false));
+  };
+
+  const audioControls = (
+    <>
+      <audio ref={audioRef} src={audioTrack} loop preload="auto" />
+      <motion.button
+        type="button"
+        onClick={toggleSound}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.96 }}
+        className="fixed right-4 bottom-4 z-50 flex h-12 w-12 items-center justify-center rounded-full"
+        style={{
+          backgroundColor: soundEnabled ? C.red : C.ink,
+          color: C.bone,
+          border: `2px solid ${C.ink}`,
+          boxShadow: `4px 4px 0 ${C.ink}`,
+        }}
+        aria-label={soundEnabled ? "Disable sound" : "Enable sound"}
+        title={soundEnabled ? "Disable sound" : "Enable sound"}
+      >
+        {soundEnabled ? (
+          <Volume2 className="h-5 w-5" />
+        ) : (
+          <VolumeX className="h-5 w-5" />
+        )}
+      </motion.button>
+    </>
+  );
+
+  const withAudio = (content: React.ReactNode) => (
+    <>
+      {audioControls}
+      {content}
+    </>
+  );
+
   if (route.name === "crew") {
-    return (
+    return withAudio(
       <div>
         <NavStrip route={route} setRoute={setRoute} />
         <Crew onSelect={(id) => setRoute({ name: "member", id })} />
@@ -186,7 +256,7 @@ export default function App() {
     );
   }
   if (route.name === "gears") {
-    return (
+    return withAudio(
       <div>
         <NavStrip route={route} setRoute={setRoute} />
         <Gears />
@@ -196,19 +266,21 @@ export default function App() {
   if (route.name === "member") {
     const m = findMember(route.id);
     if (!m) {
-      return (
+      return withAudio(
         <div>
           <NavStrip route={{ name: "crew" }} setRoute={setRoute} />
           <Crew onSelect={(id) => setRoute({ name: "member", id })} />
         </div>
       );
     }
-    return <MemberPage member={m} onBack={() => setRoute({ name: "crew" })} />;
+    return withAudio(
+      <MemberPage member={m} onBack={() => setRoute({ name: "crew" })} />,
+    );
   }
 
   const slide = slides[index];
 
-  return (
+  return withAudio(
     <div
       className="h-screen overflow-hidden flex flex-col relative"
       style={{
